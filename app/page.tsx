@@ -57,12 +57,12 @@ export default function HomePage() {
 
       {/* ===== 어떤 고민을 같이 봐드리나요 (white) ===== */}
       <section
-        id="care"
+        id="about"
         style={{ scrollMarginTop: 80, padding: "clamp(64px,9vw,104px) 0", background: "var(--paper)" }}
       >
         <div style={WRAP}>
           <div data-reveal style={{ ...EYEBROW, color: "var(--blue)" }}>
-            Store Advantage
+            매장 소개
           </div>
           <h2
             data-reveal
@@ -344,7 +344,7 @@ export default function HomePage() {
           >
             <div style={{ flex: "1 1 380px", minWidth: 280 }}>
               <div data-reveal style={{ ...EYEBROW, color: "var(--blue)" }}>
-                Visit
+                오시는 길
               </div>
               <h2
                 data-reveal
