@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     siteName: store.name,
     url: SITE_URL,
-    title: SITE_TITLE,
+    title: store.name,
     description: SITE_DESC,
     images: [
       {
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_TITLE,
+    title: store.name,
     description: SITE_DESC,
     images: [OG_IMAGE],
   },
