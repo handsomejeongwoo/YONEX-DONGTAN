@@ -53,7 +53,7 @@ export default function HomePage() {
       <Header variant="home" smartStoreUrl={store.smartStoreUrl} />
 
       {/* ===== HERO — 요넥스 동탄 브랜드 (파랑/초록 5:5 · motion) ===== */}
-      <HomeHero smartStoreUrl={store.smartStoreUrl} official={store.official} />
+      <HomeHero official={store.official} />
 
       {/* ===== 어떤 고민을 같이 봐드리나요 (white) ===== */}
       <section
@@ -380,14 +380,6 @@ export default function HomePage() {
                   className="btn btn-primary"
                 >
                   네이버지도에서 길찾기 →
-                </a>
-                <a
-                  href={store.smartStoreUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-line"
-                >
-                  스마트스토어
                 </a>
               </div>
             </div>

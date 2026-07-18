@@ -15,7 +15,7 @@ import {
 
 export const metadata: Metadata = {
   title: `${owner.name} · ${store.name} 오너 · 배드민턴 플레이어`,
-  description: `${store.name} ${owner.name}. 코트에서 검증한 감각으로 장비를 함께 맞춥니다. 공개 확인된 대회 기록과 경기 영상.`,
+  description: `${store.name} ${owner.name}. 코트에서 검증한 감각으로 장비를 함께 맞춥니다. 대회 기록과 경기 영상.`,
 };
 
 const WRAP: React.CSSProperties = {
@@ -91,10 +91,6 @@ export default function OwnerPage() {
   const matches = ownerMatchVideos(4);
   const gear = ownerGearVideos(2);
   const instagram = featuredInstagram(6);
-
-  const years = records.map((r) => Number(r.year)).filter(Boolean);
-  const yearFrom = years.length ? Math.min(...years) : null;
-  const yearTo = years.length ? Math.max(...years) : null;
 
   return (
     <div id="top" style={{ width: "100%", overflowX: "hidden" }}>
@@ -268,14 +264,8 @@ export default function OwnerPage() {
             <span style={{ fontSize: 15, color: "#BFD4EB" }}>
               {store.name} 오너 · 배드민턴 플레이어
             </span>
-            {yearFrom && yearTo && (
-              <span style={{ fontSize: 15 }}>
-                <span style={{ color: "#BFD4EB" }}>공개 확인 대회 기록</span>{" "}
-                {yearFrom} – {yearTo}
-              </span>
-            )}
             <span style={{ fontSize: 15 }}>
-              <span style={{ color: "#BFD4EB" }}>출전 등급</span> 준자강 · A · Z
+              <span style={{ color: "#BFD4EB" }}>출전 등급</span> 준자강 · A
             </span>
           </div>
         </div>
@@ -384,10 +374,6 @@ export default function OwnerPage() {
           >
             코트에서 확인된 기록
           </h2>
-          <p data-reveal style={{ fontSize: 15, color: "var(--ink-soft)", margin: "14px 0 0" }}>
-            공개 자료로 확인한 대회 이력입니다. 최신순으로 정리했습니다.
-          </p>
-
           <div style={{ marginTop: "clamp(28px,4vw,44px)", position: "relative" }}>
             <div
               aria-hidden
@@ -485,22 +471,8 @@ export default function OwnerPage() {
                     {r.title}
                   </div>
                   <div style={{ fontSize: 14, color: "var(--ink-soft)", marginTop: 4 }}>
-                    {r.category} · 파트너 {r.partner}
+                    파트너 · {r.partner}
                   </div>
-                  <a
-                    href={r.source}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: "inline-block",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      color: "var(--blue)",
-                      marginTop: 8,
-                    }}
-                  >
-                    출처 보기 ↗
-                  </a>
                 </div>
               );
             })}
@@ -643,54 +615,24 @@ export default function OwnerPage() {
         </div>
       </section>
 
-      {/* ===== CTA — 코트 사진 배경 + 블루 오버레이 ===== */}
+      {/* ===== Official dealer mark ===== */}
       <section
         style={{
-          position: "relative",
-          padding: "clamp(80px,12vw,140px) 0",
-          background: "var(--blue)",
-          color: "#fff",
-          overflow: "hidden",
+          padding: "clamp(48px,8vw,88px) 24px",
+          background: "#fff",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/assets/hong-seungin-hero.jpg"
-          alt=""
-          aria-hidden
+          src="/assets/yonex-dongtan-certified-dealer.png"
+          alt="요넥스 공식 인증 대리점 요넥스 동탄점"
           style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
+            display: "block",
+            width: "min(100%, 760px)",
+            height: "auto",
+            margin: "0 auto",
           }}
         />
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(180deg,rgba(8,42,94,.78),rgba(11,80,161,.82))",
-          }}
-        />
-        <div style={{ ...WRAP, position: "relative", textAlign: "center" }}>
-          <h2
-            data-reveal
-            style={{
-              fontSize: "clamp(28px,4.2vw,46px)",
-              lineHeight: 1.16,
-              letterSpacing: "-0.03em",
-              fontWeight: 800,
-              margin: "0 auto",
-              maxWidth: "18em",
-              textShadow: "0 2px 12px rgba(0,0,0,.28)",
-            }}
-          >
-            장비 상담은 요넥스 동탄점에서.
-          </h2>
-        </div>
       </section>
 
       <Footer store={store} variant="owner" />

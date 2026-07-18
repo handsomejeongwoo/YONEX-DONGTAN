@@ -3,9 +3,50 @@ import "./globals.css";
 import { store } from "@/lib/content";
 import ScrollTop from "@/components/ScrollTop";
 
+const SITE_URL = "https://yonex-dongtan.vercel.app";
+const SITE_TITLE = `${store.name} · ${store.official}`;
+const SITE_DESC = `${store.official} ${store.name}. 경기 경험으로 고르고 정확한 작업으로 완성합니다. 라켓·스트링·신발·대회 장비 상담.`;
+const OG_IMAGE = "/assets/og-image.png";
+
 export const metadata: Metadata = {
-  title: "요넥스 동탄점 · 실전에서 검증한 선택",
-  description: `${store.official}, ${store.name}. 전국 대회 다수 입상의 사장님이 내 플레이에 맞는 요넥스 장비를 함께 찾습니다.`,
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: `%s · ${store.name}`,
+  },
+  description: SITE_DESC,
+  keywords: [
+    "요넥스 동탄점",
+    "요넥스 동탄",
+    "동탄 배드민턴",
+    "배드민턴 라켓",
+    "스트링 작업",
+    "요넥스 공식 대리점",
+    "YONEX",
+  ],
+  alternates: { canonical: SITE_URL },
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    siteName: store.name,
+    url: SITE_URL,
+    title: SITE_TITLE,
+    description: SITE_DESC,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: `${store.name} ${store.official}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESC,
+    images: [OG_IMAGE],
+  },
 };
 
 export default function RootLayout({

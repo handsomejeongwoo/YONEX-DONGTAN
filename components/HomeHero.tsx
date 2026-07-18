@@ -5,13 +5,7 @@ import { motion, useReducedMotion } from "motion/react";
 // 요넥스 스포츠 톤: 빠르게 들어오고 단단하게 멈춘다(ease-out).
 const EASE = [0.22, 0.61, 0.18, 1] as const;
 
-export default function HomeHero({
-  smartStoreUrl,
-  official,
-}: {
-  smartStoreUrl: string;
-  official: string;
-}) {
+export default function HomeHero({ official }: { official: string }) {
   const reduce = useReducedMotion() ?? false;
 
   // 콘텐츠: 배경이 채워진 뒤(≈0.9s) 순서대로 등장.
@@ -123,15 +117,7 @@ export default function HomeHero({
             라켓 · 스트링 · 신발 · 대회 장비 상담
           </motion.div>
           <motion.div className="home-hero__cta" {...line(1.5)}>
-            <a
-              href={smartStoreUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-onblue"
-            >
-              스마트스토어에서 장비 보기 →
-            </a>
-            <a href="#care" className="btn btn-line-light">
+            <a href="#care" className="btn btn-onblue">
               요넥스 동탄점만의 장점
             </a>
           </motion.div>

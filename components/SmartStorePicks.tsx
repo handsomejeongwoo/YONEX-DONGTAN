@@ -272,7 +272,7 @@ export default function SmartStorePicks() {
             rel="noreferrer"
             className="btn btn-primary"
           >
-            스마트스토어에서 전체 보기 ↗
+            네이버 스마트 스토어 바로가기
           </a>
         </div>
       </div>

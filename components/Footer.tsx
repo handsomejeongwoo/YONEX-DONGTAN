@@ -8,7 +8,7 @@ export default function Footer({
   variant: "home" | "owner";
 }) {
   const links = [
-    { label: "스마트스토어", href: store.smartStoreUrl, ext: true },
+    { label: "네이버 스마트 스토어", href: store.smartStoreUrl, ext: true },
     { label: "인스타그램", href: store.instagramUrl, ext: true },
     { label: "유튜브", href: store.youtubeChannelUrl, ext: true },
     variant === "home"

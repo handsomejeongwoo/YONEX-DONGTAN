@@ -23,8 +23,8 @@
     "smartStoreUrl": "https://smartstore.naver.com/yonexdontan",
     "instagramUrl": "https://www.instagram.com/yonex_dongtan/",
     "youtubeChannelUrl": "https://www.youtube.com/channel/UCZ9iNela2zq6MKuvkh7iFpQ",
-    "naverMapUrl": "https://map.naver.com/p/search/%EC%9A%94%EB%84%A5%EC%8A%A4%20%EB%8F%99%ED%83%84%EC%A0%90",
-    "naverMap": { "lat": 37.2003, "lng": 127.0985, "zoom": 16 }
+    "naverMapUrl": "https://pcmap.place.naver.com/place/1093842852/home?bk_query=%EC%9A%94%EB%84%A5%EC%8A%A4%20%EB%8F%99%ED%83%84%EC%A0%90&entry=bmp&fromPanelNum=2&timestamp=202607190121&locale=ko&svcName=map_pcv5&searchText=%EC%9A%94%EB%84%A5%EC%8A%A4%20%EB%8F%99%ED%83%84%EC%A0%90",
+    "naverMap": { "lat": 37.1856652, "lng": 127.1020731, "zoom": 18 }
   },
   "owner": {
     "name": "홍승인",

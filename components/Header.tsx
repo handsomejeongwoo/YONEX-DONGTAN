@@ -99,7 +99,7 @@ export default function Header({
               rel="noopener noreferrer"
               className="btn btn-sm btn-primary"
             >
-              네이버스토어 바로가기 ↗
+              네이버 스마트 스토어 바로가기
             </a>
           </nav>
         )}
@@ -184,7 +184,7 @@ export default function Header({
               borderRadius: 2,
             }}
           >
-            네이버스토어 바로가기
+            네이버 스마트 스토어 바로가기
           </a>
         </nav>
       )}

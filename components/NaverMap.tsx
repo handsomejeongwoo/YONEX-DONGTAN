@@ -45,6 +45,11 @@ export default function NaverMap({
   useEffect(() => {
     if (!CLIENT_ID) return;
     let cancelled = false;
+    // 네이버 인증 실패(도메인 미등록·반영지연 등) 시 링크 카드로 폴백.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).navermap_authFailure = () => {
+      if (!cancelled) setOk(false);
+    };
     loadNaverMaps(CLIENT_ID)
       .then(() => {
         if (cancelled || !ref.current) return;
