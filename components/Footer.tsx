@@ -83,7 +83,7 @@ export default function Footer({
       >
         <p style={{ fontSize: 12.5, color: "#6f858d", margin: 0 }}>
           요넥스 로고 및 상표는 각 권리자에게 귀속됩니다. 본 페이지는 {store.name}{" "}
-          소개용 초기 시안입니다.
+          소개용 초기 시안이며, 일부 디자인과 콘텐츠는 AI를 활용해 제작되었습니다.
         </p>
       </div>
     </footer>
