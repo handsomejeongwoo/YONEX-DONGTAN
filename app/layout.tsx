@@ -4,14 +4,13 @@ import { store } from "@/lib/content";
 import ScrollTop from "@/components/ScrollTop";
 
 const SITE_URL = "https://yonex-dongtan.vercel.app";
-const SITE_TITLE = `${store.name} · ${store.official}`;
 const SITE_DESC = `${store.official} ${store.name}. 경기 경험으로 고르고 정확한 작업으로 완성합니다. 라켓·스트링·신발·대회 장비 상담.`;
 const OG_IMAGE = "/assets/og-image.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: SITE_TITLE,
+    default: store.name,
     template: `%s · ${store.name}`,
   },
   description: SITE_DESC,
