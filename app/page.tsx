@@ -270,7 +270,14 @@ export default function HomePage() {
       <SmartStorePicks />
 
       {/* ===== 유튜브 최신 영상 3 — mist ===== */}
-      <section style={{ padding: "clamp(64px,9vw,104px) 0", background: "var(--mist)" }}>
+      <section
+        id="videos"
+        style={{
+          scrollMarginTop: 80,
+          padding: "clamp(64px,9vw,104px) 0",
+          background: "var(--mist)",
+        }}
+      >
         <div style={WRAP}>
           <div data-reveal style={{ ...EYEBROW, color: "var(--blue)" }}>
             YouTube — 배드민턴 홍승인
