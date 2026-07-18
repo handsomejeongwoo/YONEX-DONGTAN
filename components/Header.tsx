@@ -35,7 +35,7 @@ export default function Header({
   const nav = [
     { label: "매장 소개", href: `${p}#about` },
     { label: "사장님 소개", href: "/owner", active: variant === "owner" },
-    { label: "최신 영상", href: `${p}#videos` },
+    { label: "영상", href: `${p}#videos` },
     { label: "오시는 길", href: `${p}#visit` },
   ];
 

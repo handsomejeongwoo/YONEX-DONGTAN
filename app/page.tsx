@@ -62,7 +62,7 @@ export default function HomePage() {
       >
         <div style={WRAP}>
           <div data-reveal style={{ ...EYEBROW, color: "var(--blue)" }}>
-            매장 소개
+            About
           </div>
           <h2
             data-reveal
@@ -280,7 +280,7 @@ export default function HomePage() {
       >
         <div style={WRAP}>
           <div data-reveal style={{ ...EYEBROW, color: "var(--blue)" }}>
-            YouTube — 배드민턴 홍승인
+            Videos
           </div>
           <h2
             data-reveal
@@ -344,7 +344,7 @@ export default function HomePage() {
           >
             <div style={{ flex: "1 1 380px", minWidth: 280 }}>
               <div data-reveal style={{ ...EYEBROW, color: "var(--blue)" }}>
-                오시는 길
+                Visit
               </div>
               <h2
                 data-reveal
