@@ -258,7 +258,7 @@ export default function HomePage() {
               )}
               <div data-reveal style={{ marginTop: 20 }}>
                 <a href="/owner" className="btn btn-line btn-sm">
-                  사장님 상담 방식 · 선수 기록 보기 →
+                  사장님 프로필 보기 →
                 </a>
               </div>
             </div>
