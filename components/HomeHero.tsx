@@ -86,6 +86,7 @@ export default function HomeHero({ official }: { official: string }) {
         />
         {/* 하단(그린) 점선: 우 → 좌 */}
         <path
+          className="home-hero__dots-green"
           d="M-30 470 H 1230"
           clipPath="url(#heroDotsRL)"
           fill="none"
@@ -117,7 +118,7 @@ export default function HomeHero({ official }: { official: string }) {
             라켓 · 스트링 · 신발 · 대회 장비 상담
           </motion.div>
           <motion.div className="home-hero__cta" {...line(1.5)}>
-            <a href="#care" className="btn btn-onblue">
+            <a href="#about" className="btn btn-onblue">
               요넥스 동탄점만의 장점
             </a>
           </motion.div>
