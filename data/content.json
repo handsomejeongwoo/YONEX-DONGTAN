@@ -1,0 +1,527 @@
+{
+  "meta": {
+    "updatedAt": "2026-07-18",
+    "youtube": {
+      "channelId": "UCZ9iNela2zq6MKuvkh7iFpQ",
+      "rssUrl": "https://www.youtube.com/feeds/videos.xml?channel_id=UCZ9iNela2zq6MKuvkh7iFpQ",
+      "lastSyncedAt": null,
+      "note": "youtube 배열은 scripts/sync-youtube.mjs 로 갱신합니다. 초기값은 콘텐츠 링크 팩(2026-07-18) 기준 최신 15개입니다."
+    },
+    "instagram": {
+      "lastFetchedAt": "2026-07-18T13:30:01.724Z",
+      "note": "og:image 로컬 캐시. 실패분은 그라디언트 카드로 폴백합니다."
+    }
+  },
+  "store": {
+    "name": "요넥스 동탄점",
+    "official": "요넥스코리아 공식 대리점",
+    "categories": [
+      "배드민턴",
+      "의류"
+    ],
+    "address": "경기 화성시 동탄대로14길 5-17, 101호",
+    "smartStoreUrl": "https://smartstore.naver.com/yonexdontan",
+    "instagramUrl": "https://www.instagram.com/yonex_dongtan/",
+    "youtubeChannelUrl": "https://www.youtube.com/channel/UCZ9iNela2zq6MKuvkh7iFpQ",
+    "naverMapUrl": "https://map.naver.com/p/search/%EC%9A%94%EB%84%A5%EC%8A%A4%20%EB%8F%99%ED%83%84%EC%A0%90",
+    "naverMap": { "lat": 37.2003, "lng": 127.0985, "zoom": 16 }
+  },
+  "owner": {
+    "name": "홍승인",
+    "role": "요넥스 동탄점 사장님",
+    "instagramName": "홍승인 | 요넥스 동탄점",
+    "tagline": "코트에서 답을 찾는 사장님",
+    "summary": "매장에만 있는 사장님이 아닙니다. 직접 대회를 뛰고, 장비를 써보고, 그 감각을 손님에게 그대로 풀어드립니다.",
+    "playstyle": "날카로운 스매싱으로 평가받는 공격적인 플레이",
+    "playstyleSource": "https://gg.newdaily.co.kr/site/data/html/2025/10/26/2025102600130.html",
+    "youtubeChannelUrl": "https://www.youtube.com/channel/UCZ9iNela2zq6MKuvkh7iFpQ",
+    "instagramUrl": "https://www.instagram.com/yonex_dongtan/"
+  },
+  "records": [
+    {
+      "date": "2023-04-30",
+      "year": "2023",
+      "title": "2023 쏘텍스컵 STN 전국배드민턴대회",
+      "category": "남복 통합 준자강",
+      "partner": "홍진수",
+      "result": "우승",
+      "source": "https://www.stnsports.co.kr/news/articleView.html?idxno=205421",
+      "highlight": true
+    },
+    {
+      "date": "2023-07-09",
+      "year": "2023",
+      "title": "2023 아쿠아듀오 샤워플러스 전국배드민턴대회",
+      "category": "SA급 (결승 25–24)",
+      "partner": "박명진",
+      "result": "우승",
+      "source": "https://www.badmintontimes.com/article2/articleRead.jsp?menunum=101&no=7901",
+      "highlight": true
+    },
+    {
+      "date": "2024-07-05",
+      "year": "2024",
+      "title": "제19회 원주 치악배 오픈",
+      "category": "남복 20대 A (결승 25–17)",
+      "partner": "박명진",
+      "result": "우승",
+      "source": "https://m.kwnews.co.kr/page/view/2024070510244721863?site_preference=normal",
+      "highlight": true
+    },
+    {
+      "date": "2025-04-26",
+      "year": "2025",
+      "title": "창립24주년 2025 KBB 전국배드민턴대회",
+      "category": "남복 Z",
+      "partner": "한기훈",
+      "result": "우승",
+      "source": "https://setpoint.kr/player/22573/",
+      "highlight": true
+    },
+    {
+      "date": "2025-06-07",
+      "year": "2025",
+      "title": "제6회 코리아민턴사랑 유·청소년&청년 배드민턴대회",
+      "category": "남복 20대 Z",
+      "partner": "장준호",
+      "result": "우승",
+      "source": "https://setpoint.kr/player/22573/",
+      "highlight": false
+    },
+    {
+      "date": "2025-10-26",
+      "year": "2025",
+      "title": "2025 수원배 전국배드민턴대회",
+      "category": "남복 준자강 (결승 21–18)",
+      "partner": "허동녕",
+      "result": "우승",
+      "source": "https://gg.newdaily.co.kr/site/data/html/2025/10/26/2025102600131.html",
+      "highlight": true
+    },
+    {
+      "date": "2022-08-07",
+      "year": "2022",
+      "title": "제17회 원주 치악배 오픈",
+      "category": "준자강 혼복",
+      "partner": "엄아영",
+      "result": "준우승",
+      "source": "https://kwnews.co.kr/page/view/2022080710001813907",
+      "highlight": false
+    },
+    {
+      "date": "2025-04-06",
+      "year": "2025",
+      "title": "거제 섬안의 섬여행 생활체육 전국배드민턴대회",
+      "category": "남복 준자강 (결승 24–25)",
+      "partner": "김네오",
+      "result": "준우승",
+      "source": "https://sfa.bkplay.kr/tournament/roundMatch?playingCategoryId=53979&tnmtId=2801",
+      "highlight": false
+    },
+    {
+      "date": "2025-05-24",
+      "year": "2025",
+      "title": "2025 메스타리배 코리아민턴사랑 전국배드민턴대회",
+      "category": "남복 Z",
+      "partner": "허동녕",
+      "result": "3위",
+      "source": "https://setpoint.kr/player/32291/",
+      "highlight": false
+    },
+    {
+      "date": "2026-04-11",
+      "year": "2026",
+      "title": "제2회 대전광역시 스트로커스 슈퍼매치",
+      "category": "남복 준자강",
+      "partner": "박경민",
+      "result": "준우승",
+      "source": "https://setpoint.kr/player/25722/",
+      "highlight": false
+    }
+  ],
+  "youtube": [
+    {
+      "id": "geBOfzbZj1I",
+      "title": "나노플레어 700프로 구매 전 꼭 보세요! 🔥 대체할 라켓은?",
+      "publishedAt": "2026-07-14",
+      "type": "video",
+      "url": "https://www.youtube.com/watch?v=geBOfzbZj1I",
+      "thumbnail": "https://i.ytimg.com/vi/geBOfzbZj1I/hqdefault.jpg",
+      "category": "장비 리뷰",
+      "badge": "GEAR REVIEW",
+      "tags": [
+        "home-latest",
+        "owner-gear"
+      ]
+    },
+    {
+      "id": "ngXm3RHb7OQ",
+      "title": "배드민턴 스트링 2매듭? 4매듭? 뭐가 더 좋을까?",
+      "publishedAt": "2026-07-11",
+      "type": "short",
+      "url": "https://www.youtube.com/shorts/ngXm3RHb7OQ",
+      "thumbnail": "https://i.ytimg.com/vi/ngXm3RHb7OQ/hqdefault.jpg",
+      "category": "스트링",
+      "badge": "SHORTS",
+      "tags": []
+    },
+    {
+      "id": "_qD2RLLVw7I",
+      "title": "비싼 라켓이 무조건 좋을까?🏸",
+      "publishedAt": "2026-07-10",
+      "type": "short",
+      "url": "https://www.youtube.com/shorts/_qD2RLLVw7I",
+      "thumbnail": "https://i.ytimg.com/vi/_qD2RLLVw7I/hqdefault.jpg",
+      "category": "장비 리뷰",
+      "badge": "SHORTS",
+      "tags": [
+        "home-latest",
+        "owner-gear"
+      ]
+    },
+    {
+      "id": "6tV0lqg2U_0",
+      "title": "[준자강 결승] 김네오·홍승인 vs 박성민·이승우 | 광주 북구청장기 배드민턴",
+      "publishedAt": "2026-07-08",
+      "type": "video",
+      "url": "https://www.youtube.com/watch?v=6tV0lqg2U_0",
+      "thumbnail": "https://i.ytimg.com/vi/6tV0lqg2U_0/hqdefault.jpg",
+      "category": "경기 영상",
+      "badge": "MATCH",
+      "tags": [
+        "home-latest",
+        "owner-match"
+      ]
+    },
+    {
+      "id": "7PmP7ieE8Cw",
+      "title": "광주 북구청장기 4강·결승! 과연 우승했을까?🏸 전국대회 브이로그 (2편)",
+      "publishedAt": "2026-07-05",
+      "type": "video",
+      "url": "https://www.youtube.com/watch?v=7PmP7ieE8Cw",
+      "thumbnail": "https://i.ytimg.com/vi/7PmP7ieE8Cw/hqdefault.jpg",
+      "category": "대회 브이로그",
+      "badge": "VLOG",
+      "tags": [
+        "owner-match"
+      ]
+    },
+    {
+      "id": "kQnIFsNzBL0",
+      "title": "광주 북구청장기 김네오x홍승인 듀오",
+      "publishedAt": "2026-07-04",
+      "type": "short",
+      "url": "https://www.youtube.com/shorts/kQnIFsNzBL0",
+      "thumbnail": "https://i.ytimg.com/vi/kQnIFsNzBL0/hqdefault.jpg",
+      "category": "경기 하이라이트",
+      "badge": "SHORTS",
+      "tags": []
+    },
+    {
+      "id": "EPUlV8BBbLU",
+      "title": "왕복 600km 원정… 광주 북구청장기 준자강 출전! (1편)",
+      "publishedAt": "2026-07-02",
+      "type": "video",
+      "url": "https://www.youtube.com/watch?v=EPUlV8BBbLU",
+      "thumbnail": "https://i.ytimg.com/vi/EPUlV8BBbLU/hqdefault.jpg",
+      "category": "대회 브이로그",
+      "badge": "VLOG",
+      "tags": [
+        "owner-match"
+      ]
+    },
+    {
+      "id": "nWsJnMtMdnQ",
+      "title": "대회 브이로그｜김네오 코치와 출발합니다🏸",
+      "publishedAt": "2026-07-02",
+      "type": "short",
+      "url": "https://www.youtube.com/shorts/nWsJnMtMdnQ",
+      "thumbnail": "https://i.ytimg.com/vi/nWsJnMtMdnQ/hqdefault.jpg",
+      "category": "대회 브이로그",
+      "badge": "SHORTS",
+      "tags": []
+    },
+    {
+      "id": "ZdEzlZLriB4",
+      "title": "우당탕탕 TYK 홍승인의 하루",
+      "publishedAt": "2026-05-01",
+      "type": "video",
+      "url": "https://www.youtube.com/watch?v=ZdEzlZLriB4",
+      "thumbnail": "https://i.ytimg.com/vi/ZdEzlZLriB4/hqdefault.jpg",
+      "category": "일상 브이로그",
+      "badge": "VLOG",
+      "tags": [
+        "owner-match"
+      ]
+    },
+    {
+      "id": "fs8yDeVmDNs",
+      "title": "경기 시작 전, 우리 팀 분위기 어떤데?",
+      "publishedAt": "2026-04-30",
+      "type": "short",
+      "url": "https://www.youtube.com/shorts/fs8yDeVmDNs",
+      "thumbnail": "https://i.ytimg.com/vi/fs8yDeVmDNs/hqdefault.jpg",
+      "category": "팀 분위기",
+      "badge": "SHORTS",
+      "tags": []
+    },
+    {
+      "id": "Cr0y2UaGheE",
+      "title": "요넥스동탄점 사장님 취미생활",
+      "publishedAt": "2026-04-28",
+      "type": "short",
+      "url": "https://www.youtube.com/shorts/Cr0y2UaGheE",
+      "thumbnail": "https://i.ytimg.com/vi/Cr0y2UaGheE/hqdefault.jpg",
+      "category": "매장·사장님",
+      "badge": "SHORTS",
+      "tags": []
+    },
+    {
+      "id": "Dfhvutn0Trk",
+      "title": "강철맨 김하진 코치와 첫 호흡 | 슬럼프 극복 할수있을까?",
+      "publishedAt": "2026-03-19",
+      "type": "video",
+      "url": "https://www.youtube.com/watch?v=Dfhvutn0Trk",
+      "thumbnail": "https://i.ytimg.com/vi/Dfhvutn0Trk/hqdefault.jpg",
+      "category": "대회 스토리",
+      "badge": "VLOG",
+      "tags": []
+    },
+    {
+      "id": "XQ65dFlK3Ww",
+      "title": "심판도 고민한 문제의 한 포인트, 당신의 생각은?",
+      "publishedAt": "2026-03-18",
+      "type": "short",
+      "url": "https://www.youtube.com/shorts/XQ65dFlK3Ww",
+      "thumbnail": "https://i.ytimg.com/vi/XQ65dFlK3Ww/hqdefault.jpg",
+      "category": "경기 토론",
+      "badge": "SHORTS",
+      "tags": []
+    },
+    {
+      "id": "NNuz5XNdAdE",
+      "title": "강철맨 김하진코치와 우승까지 간 랠리들",
+      "publishedAt": "2026-03-17",
+      "type": "short",
+      "url": "https://www.youtube.com/shorts/NNuz5XNdAdE",
+      "thumbnail": "https://i.ytimg.com/vi/NNuz5XNdAdE/hqdefault.jpg",
+      "category": "우승 랠리",
+      "badge": "SHORTS",
+      "tags": []
+    },
+    {
+      "id": "FKHvuy9elus",
+      "title": "강철맨 김하진코치 후위 플레이",
+      "publishedAt": "2026-03-16",
+      "type": "short",
+      "url": "https://www.youtube.com/shorts/FKHvuy9elus",
+      "thumbnail": "https://i.ytimg.com/vi/FKHvuy9elus/hqdefault.jpg",
+      "category": "전술·플레이",
+      "badge": "SHORTS",
+      "tags": []
+    }
+  ],
+  "instagram": [
+    {
+      "id": "Dar-2srvyxD",
+      "postedAt": "2026-07-12",
+      "type": "reel",
+      "caption": "2매듭이라고 다 같은 게 아닙니다 🔥",
+      "url": "https://www.instagram.com/p/Dar-2srvyxD/",
+      "tags": [
+        "장비·스트링"
+      ],
+      "featured": true,
+      "order": 1,
+      "image": "/assets/instagram/Dar-2srvyxD.jpg",
+      "thumbnailSource": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/746807662_18400173235084953_7793341125063820557_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=101&ig_cache_key=MzkzOTUxODczNjc3OTY1MjE2MzE4NDAwMTczMjM4MDg0OTUz.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEyMDYuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=FoI3G4VWjXwQ7kNvwEw6G0A&_nc_oc=AdpsXe7lm3Mn70rCJdKIkYnQvqGl83C0MP86VQGRihiyVwYKHk4lDkr1M9buVmorVKY&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_gid=GwGHwUQUVGx7Ku0g-figrw&_nc_ss=7a22e&oh=00_AQDRJ4wYJ8O6ghJwaV5p8kynjrnb3EITADPQQRgHCG11Uw&oe=6A6138CB"
+    },
+    {
+      "id": "Dap8mgKPQRA",
+      "postedAt": "2026-07-11",
+      "type": "reel",
+      "caption": "나노플레어 700프로… 비싼 만큼 좋을까? 솔직 리뷰 🏸",
+      "url": "https://www.instagram.com/p/Dap8mgKPQRA/",
+      "tags": [
+        "라켓 상담"
+      ],
+      "featured": true,
+      "order": 2,
+      "image": "/assets/instagram/Dap8mgKPQRA.jpg",
+      "thumbnailSource": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/741963652_18400071112084953_7025865787820855339_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=103&ig_cache_key=MzkzODk0NTg3Nzc3NDUwMDkyODE4NDAwMDcxMTA5MDg0OTUz.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEyMDYuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=_Nu2EW_I5oEQ7kNvwGSCA2q&_nc_oc=AdpF9DEZ_CUSda8n6SBHBvuqhTGD1UuwfJYNXN_tZnjeKfpStKNuC-Cq5_uvFPb6mYc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_gid=GwGHwUQUVGx7Ku0g-figrw&_nc_ss=7a22e&oh=00_AQDoe0aFkfaD-DNOQYJN7_4fN2N3JsKsMlxFsVVul0ZANg&oe=6A614025"
+    },
+    {
+      "id": "DaXi3UJPk_Z",
+      "postedAt": "2026-07-04",
+      "type": "reel",
+      "caption": "광주 북구청장기 준자강 김네오 X 홍승인 듀오",
+      "url": "https://www.instagram.com/p/DaXi3UJPk_Z/",
+      "tags": [
+        "대표 경기"
+      ],
+      "featured": true,
+      "order": 3,
+      "image": "/assets/instagram/DaXi3UJPk_Z.jpg",
+      "thumbnailSource": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/736440482_18399117052084953_4982484931012124245_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=MzkzMzc2NjEzNDMxMzkzMDcxMzE4Mzk5MTE3MDQ5MDg0OTUz.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjEyMDYuc2RyLnZpZGVvX2RlZmF1bHRfY292ZXJfZnJhbWUuQzMifQ%3D%3D&_nc_ohc=tmYZOvhDvnsQ7kNvwH47IeY&_nc_oc=AdqZFDXXmjevfMJuJ736F41J05yMgYjDYT_Z4GiB62kSGJKjddndY8jFSz8eXQ4RIxI&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_gid=GwGHwUQUVGx7Ku0g-figrw&_nc_ss=7a22e&oh=00_AQDJbiGg59LZP62r6WpLh6mCRWTiL4T86q7H_FuVV2K9uQ&oe=6A6153AD"
+    },
+    {
+      "id": "DZriFfTPo7P",
+      "postedAt": "2026-06-17",
+      "type": "reel",
+      "caption": "Astrox 88D PRO — 스매시 최적화 라켓",
+      "url": "https://www.instagram.com/p/DZriFfTPo7P/",
+      "tags": [
+        "라켓 추천"
+      ],
+      "featured": true,
+      "order": 4,
+      "image": "/assets/instagram/DZriFfTPo7P.jpg",
+      "thumbnailSource": "https://scontent-icn2-1.cdninstagram.com/v/t51.71878-15/725153492_989645503838611_8480465698361548770_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=110&ig_cache_key=MzkyMTM3NzgxMTM0Mzc3MzM5MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5zZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=8qxytJAuXgoQ7kNvwEwr0nL&_nc_oc=AdoCGcdpDG98Q53xnRyiVq8n6xjsKqVGE6m_NPQ9SQ0pla_1uCJ9MfzJhB8mHF3v7FM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_gid=GwGHwUQUVGx7Ku0g-figrw&_nc_ss=7a22e&oh=00_AQBDyzPydQ5Zd13pJdQioAauOdu0-n9wNZOF33yVDDGjuA&oe=6A61594F"
+    },
+    {
+      "id": "DYvlM3Vgg1s",
+      "postedAt": "2026-05-25",
+      "type": "reel",
+      "caption": "2026 제2회 프로배드민턴 X 코민사 전국대회 남복 준자강 결승",
+      "url": "https://www.instagram.com/p/DYvlM3Vgg1s/",
+      "tags": [
+        "대표 경기"
+      ],
+      "featured": true,
+      "order": 5,
+      "image": "/assets/instagram/DYvlM3Vgg1s.jpg",
+      "thumbnailSource": "https://scontent-icn2-1.cdninstagram.com/v/t51.71878-15/708276793_1921524048550155_3519248005349859559_n.jpg?stp=dst-jpegr_e15_tt6&_nc_cat=101&ig_cache_key=MzkwNDUwMzAxMzcyNDc4NjAyOA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5oZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=rNhfjIk8ANYQ7kNvwGM7VDw&_nc_oc=AdqtIAMSjJiWIvLGUAN9ozmZvGMHQ4BmGNfRCC2bIUc1pRL8OZXULJrVRQ1Hz_PDMZM&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&se=-1&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_gid=GwGHwUQUVGx7Ku0g-figrw&_nc_ss=7a22e&oh=00_AQD0Sob8h4a_A1Qct47CxhgIdVeDEXJ19at80ZMpDJw_6Q&oe=6A61387D"
+    },
+    {
+      "id": "DXqEZtcD_MP",
+      "postedAt": "2026-04-28",
+      "type": "reel",
+      "caption": "요넥스동탄점 사장님 취미생활",
+      "url": "https://www.instagram.com/p/DXqEZtcD_MP/",
+      "tags": [
+        "대표 캐주얼"
+      ],
+      "featured": true,
+      "order": 6,
+      "image": "/assets/instagram/DXqEZtcD_MP.jpg"
+    },
+    {
+      "id": "DaZVz27PXn6",
+      "postedAt": "2026-07-05",
+      "type": "image",
+      "caption": "광주 북구청장기 4강·결승, 전국대회 브이로그 2편",
+      "url": "https://www.instagram.com/p/DaZVz27PXn6/",
+      "tags": [
+        "대회 스토리"
+      ],
+      "featured": false,
+      "image": "/assets/instagram/DaZVz27PXn6.jpg"
+    },
+    {
+      "id": "DaSHVoRyQQ_",
+      "postedAt": "2026-07-02",
+      "type": "image",
+      "caption": "네오 코치와 함께 떠난 전라도 광주 원정대회",
+      "url": "https://www.instagram.com/p/DaSHVoRyQQ_/",
+      "tags": [
+        "대회 브이로그"
+      ],
+      "featured": false,
+      "image": "/assets/instagram/DaSHVoRyQQ_.jpg"
+    },
+    {
+      "id": "DV8Vn2_j3Z6",
+      "postedAt": "2026-03-16",
+      "type": "reel",
+      "caption": "불꽃남자 VS 강철맨 — 김하진 코치와의 준자강 남복 랠리",
+      "url": "https://www.instagram.com/p/DV8Vn2_j3Z6/",
+      "tags": [
+        "대표 경기"
+      ],
+      "featured": false,
+      "image": "/assets/instagram/DV8Vn2_j3Z6.jpg",
+      "thumbnailSource": "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-15/652412965_18383721790084953_790094683103945855_n.jpg?stp=dst-jpg_e15_tt6&_nc_cat=100&ig_cache_key=Mzg1NDA1MDQ3OTIwNzA1MjkyMjE4MzgzNzIxNzg0MDg0OTUz.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjkwNC5zZHIudmlkZW9fZGVmYXVsdF9jb3Zlcl9mcmFtZS5DMyJ9&_nc_ohc=zBdlvnG06tIQ7kNvwE7g4N1&_nc_oc=AdppvXBD4GIhpZa96vvGabrxa9Jy-VwbchLoCkd-HAY98p4LwsJI7ab4eeXE8_qwaR0&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_gid=GwGHwUQUVGx7Ku0g-figrw&_nc_ss=7a22e&oh=00_AQASwGbNTmhy_3f7ImC56Lkdjo6ublsCk-xAbaPfgcsKIQ&oe=6A6153A2"
+    },
+    {
+      "id": "DTFbiR6D479",
+      "postedAt": "2026-01-04",
+      "type": "reel",
+      "caption": "Non-Stop Men's Doubles Rally 🔥",
+      "url": "https://www.instagram.com/p/DTFbiR6D479/",
+      "tags": [
+        "경기 하이라이트"
+      ],
+      "featured": false,
+      "image": "/assets/instagram/DTFbiR6D479.jpg",
+      "thumbnailSource": "https://scontent-icn2-1.cdninstagram.com/v/t51.71878-15/610292707_1553757485953936_6897107027072503834_n.jpg?stp=dst-jpegr_e15_tt6&_nc_cat=108&ig_cache_key=MzgwMjU2NjU2MzMyOTk2OTkxNw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNMSVBTLnhwaWRzLjY0MC5oZHIudmlkZW9fbmZyYW1lX2NvdmVyX2ZyYW1lLkMzIn0%3D&_nc_ohc=Ky6v-NyP87kQ7kNvwH_vHOv&_nc_oc=AdqMGGAijfH2PsqUC0Z6TfNHp4wDToNxj0dwxT45jzNoyZUHrDh2E8xIeP1af3i5mZU&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&se=-1&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_gid=DYmxiEvR7hJsvu32zOnUDA&_nc_ss=7a22e&oh=00_AQA2WCDvKcTTAETjY3zn99QmroYTmuq9Jc5Y32_TevT2Dg&oe=6A61510E"
+    },
+    {
+      "id": "DOdOgEFDyWH",
+      "postedAt": "2025-09-11",
+      "type": "image",
+      "caption": "승부에 집착하지 않고 경기하고 싶다",
+      "url": "https://www.instagram.com/p/DOdOgEFDyWH/",
+      "tags": [
+        "인물 사진"
+      ],
+      "featured": false,
+      "pinned": true,
+      "image": "/assets/instagram/DOdOgEFDyWH.jpg"
+    },
+    {
+      "id": "C8bDNp5SmSU",
+      "postedAt": "2024-06-20",
+      "type": "image",
+      "caption": "YONEX DONGTAN / 국가대표 브랜드 요넥스",
+      "url": "https://www.instagram.com/p/C8bDNp5SmSU/",
+      "tags": [
+        "브랜드"
+      ],
+      "featured": false,
+      "pinned": true,
+      "image": "/assets/instagram/C8bDNp5SmSU.jpg"
+    }
+  ],
+  "shopPicks": [
+    {
+      "id": "racket",
+      "name": "라켓",
+      "blurb": "플레이 스타일에 맞춰 무게·밸런스를 함께 고릅니다.",
+      "image": "",
+      "url": "https://smartstore.naver.com/yonexdontan",
+      "badge": "RACKET",
+      "category": "라켓",
+      "visible": true
+    },
+    {
+      "id": "shoes",
+      "name": "배드민턴화",
+      "blurb": "발 모양과 코트 무브먼트에 맞는 착화감으로.",
+      "image": "",
+      "url": "https://smartstore.naver.com/yonexdontan",
+      "badge": "SHOES",
+      "category": "배드민턴화",
+      "visible": true
+    },
+    {
+      "id": "apparel",
+      "name": "의류",
+      "blurb": "연습부터 경기까지, 편안한 요넥스 웨어.",
+      "image": "",
+      "url": "https://smartstore.naver.com/yonexdontan",
+      "badge": "APPAREL",
+      "category": "의류",
+      "visible": true
+    },
+    {
+      "id": "gear",
+      "name": "액세서리",
+      "blurb": "그립·가방·셔틀 등 실전에 필요한 소품.",
+      "image": "",
+      "url": "https://smartstore.naver.com/yonexdontan",
+      "badge": "GEAR",
+      "category": "액세서리",
+      "visible": true
+    }
+  ]
+}
