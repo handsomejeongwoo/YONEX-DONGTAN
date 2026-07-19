@@ -55,6 +55,7 @@ export default function HomeHero() {
       next();
     };
 
+    // 처음에는 커서만 2~3회 깜빡여, 타이핑이 시작되는 순간을 또렷하게 만든다.
     timer = window.setTimeout(() => {
       typeWord("YONEX", setTypedYonex, () => {
         setTypingStage("dongtan");
@@ -62,7 +63,7 @@ export default function HomeHero() {
           typeWord("DONGTAN", setTypedDongtan, () => setTypingStage("complete"));
         }, 150);
       });
-    }, 360);
+    }, 1750);
 
     return () => {
       cancelled = true;
