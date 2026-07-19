@@ -171,12 +171,14 @@ export default function OwnerPage() {
             <div>
               <div
                 data-reveal
+                data-reveal-delay="1"
                 style={{ ...EYEBROW, color: "var(--blue)", marginBottom: 12 }}
               >
                 YONEX DONGTAN CEO · PLAYER
               </div>
               <div
                 data-reveal
+                data-reveal-delay="2"
                 style={{
                   fontFamily: "'Barlow Condensed',sans-serif",
                   fontWeight: 700,
@@ -190,6 +192,7 @@ export default function OwnerPage() {
               </div>
               <h1
                 data-reveal
+                data-reveal-delay="3"
                 style={{
                   fontSize: "clamp(34px,5vw,58px)",
                   fontWeight: 800,
@@ -202,6 +205,7 @@ export default function OwnerPage() {
               </h1>
               <div
                 data-reveal
+                data-reveal-delay="4"
                 style={{
                   ...EYEBROW,
                   color: "var(--ink-soft)",
@@ -212,6 +216,7 @@ export default function OwnerPage() {
               </div>
               <p
                 data-reveal
+                data-reveal-delay="5"
                 style={{
                   fontSize: "clamp(18px,2.2vw,22px)",
                   fontWeight: 600,
@@ -228,6 +233,7 @@ export default function OwnerPage() {
               </p>
               <div
                 data-reveal
+                data-reveal-delay="6"
                 style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 28 }}
               >
                 <a href="#records" className="btn btn-primary">
