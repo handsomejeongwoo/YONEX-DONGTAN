@@ -466,119 +466,136 @@ img {
   }
 }
 
-/* ===== 홈 인트로 — 파랑에서 초록으로, 실제 매장 로고를 지나 본문으로 ===== */
+/* ===== 홈 인트로 — 원형 마스크 확장 + 초대형 가로 타이포 (kubrick 스타일) ===== */
 .home-intro-scroll {
   position: relative;
-  height: 340svh;
-  margin-top: -68px;
-  background: #0b9d35;
+  height: 760svh; /* 스크롤 리듬을 한 단계 더 늦춘 긴 인트로 */
+  margin-top: -68px; /* 헤더 위치까지 인트로가 덮도록 끌어올림 */
+  background: #0b9d35; /* 마지막 초록 장면과 이어져 흰 틈이 안 생김 */
 }
 .home-intro {
   position: sticky;
   top: 0;
-  z-index: 90; /* 인트로가 끝나기 전에는 헤더도 보여주지 않는다. */
+  z-index: 90; /* 인트로 동안 헤더를 덮는다 */
   height: 100svh;
   min-height: 560px;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  color: #fff;
-  pointer-events: none;
+  overflow: hidden; /* 초대형 타이포 좌우 잘림 */
   isolation: isolate;
+  background: #fff; /* 시작: 흰 바탕 위의 검정 심볼 */
 }
-.home-intro__blue,
-.home-intro__green {
+/* 확장 원형 레이어(솔리드 색 + clip-path 원) — 선명한 전환, 탁색 없음 */
+.home-intro__circle {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
+  will-change: clip-path;
 }
-.home-intro__blue {
-  background: #0757af;
+.home-intro__circle--blue {
+  background: #0757af; /* 요넥스 블루 */
 }
-.home-intro__green {
-  background: #0b9d35;
-  transform-origin: bottom center;
-  will-change: transform;
+.home-intro__circle--green {
+  background: #0b9d35; /* 요넥스 그린 */
 }
-.home-intro__word {
-  grid-area: 1 / 1;
-  display: grid;
-  gap: 0.02em;
-  text-align: center;
+/* 초대형 가로 타이포 (초록 장면) */
+.home-intro__type {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2px, 1vh, 20px);
+  overflow: hidden;
+  pointer-events: none;
+}
+.home-intro__track {
+  white-space: nowrap;
   font-family: "Barlow Condensed", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: -0.055em;
-  line-height: 0.77;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+  font-size: clamp(120px, 30vh, 380px);
+  color: #fff; /* 초록 배경 위에서 또렷하게 유지 */
+  will-change: transform;
+}
+/* 시작 심볼 — 파비콘이 아닌 제공된 검정 요넥스 마크 원본 */
+.home-intro__symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: clamp(180px, 25vw, 360px);
+  translate: -50% -50%;
   will-change: transform, opacity;
 }
-.home-intro__word span {
+.home-intro__symbol img {
+  width: 100%;
+  height: auto;
   display: block;
-  justify-self: center;
-  width: 7.1ch;
-  font-size: clamp(82px, 17.2vw, 286px);
-  text-align: left;
-}
-.home-intro__word span:first-child {
-  width: 5.1ch;
-}
-.home-intro__cursor {
-  display: inline-block;
-  width: max(3px, 0.018em);
-  height: 0.68em;
-  margin-left: 0.055em;
-  vertical-align: 0.02em;
-  background: currentColor;
-  animation: intro-cursor 0.78s steps(1, end) infinite;
-}
-@keyframes intro-cursor {
-  0%,
-  48% {
-    opacity: 1;
-  }
-  49%,
-  100% {
-    opacity: 0;
-  }
 }
 .home-intro__hint {
   position: absolute;
+  z-index: 4;
+  bottom: clamp(22px, 4vh, 42px);
   left: 50%;
-  bottom: clamp(18px, 3vw, 30px);
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  color: #fff;
+  gap: 7px;
+  color: #102e43;
+  pointer-events: none;
+  translate: -50% 0;
 }
 .home-intro__hint span {
   font-family: "Barlow Condensed", sans-serif;
-  font-weight: 600;
   font-size: 11px;
-  letter-spacing: 0.22em;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
 }
+/* reduced-motion 정적 히어로 (시작 = 흰/아이보리) */
+.home-intro--static {
+  position: relative;
+  z-index: 90;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  gap: 24px;
+  background: #fff;
+  color: var(--ink);
+  overflow: hidden;
+}
+.home-intro--static .home-intro__symbol {
+  position: static;
+  translate: none;
+  width: clamp(180px, 25vw, 360px);
+}
+.home-intro--static__word {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: clamp(40px, 7vw, 84px);
+  line-height: 1;
+  text-align: center;
+  color: var(--blue);
+}
+
 @media (max-width: 860px) {
   .home-intro-scroll {
-    height: 300svh;
+    height: 680svh;
   }
-  .home-intro__word {
-    line-height: 0.82;
+  .home-intro__symbol {
+    width: clamp(170px, 56vw, 270px);
   }
-  .home-intro__word span {
-    font-size: clamp(60px, 19vw, 108px);
+  .home-intro__track {
+    font-size: clamp(84px, 22vh, 220px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-intro-scroll {
-    height: calc(100svh - 68px);
-    margin-top: 0;
-  }
-  .home-intro {
-    position: relative;
-    min-height: 0;
-  }
-  .home-intro__cursor {
-    animation: none;
+    height: auto;
+    background: #0757af;
   }
 }
