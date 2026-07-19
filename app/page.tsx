@@ -305,7 +305,7 @@ export default function HomePage() {
               }}
             >
               {videos.map((v) => (
-                <div key={v.id} data-reveal>
+                <div key={v.id} data-reveal style={{ display: "flex" }}>
                   <VideoCard item={v} variant="home" />
                 </div>
               ))}

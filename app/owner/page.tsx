@@ -262,7 +262,7 @@ export default function OwnerPage() {
             }}
           >
             <span style={{ fontSize: 15, color: "#BFD4EB" }}>
-              {store.name} 오너 · 배드민턴 플레이어
+              {store.name} CEO
             </span>
             <span style={{ fontSize: 15 }}>
               <span style={{ color: "#BFD4EB" }}>출전 등급</span> 준자강 · A

@@ -37,6 +37,8 @@ export default function VideoCard({
       style={{
         display: "flex",
         flexDirection: "column",
+        flex: 1,
+        height: "100%",
         overflow: "hidden",
         color: "#10222C",
         ...container,
@@ -106,7 +108,14 @@ export default function VideoCard({
           {item.badge}
         </span>
       </div>
-      <div style={{ padding: "18px 20px 20px" }}>
+      <div
+        style={{
+          display: "flex",
+          flex: 1,
+          flexDirection: "column",
+          padding: "18px 20px 20px",
+        }}
+      >
         <span
           style={{
             display: "inline-block",
@@ -132,7 +141,15 @@ export default function VideoCard({
         >
           {item.title}
         </div>
-        <div style={{ fontSize: 14, color: "#0B50A1", fontWeight: 600, marginTop: 14 }}>
+        <div
+          style={{
+            fontSize: 14,
+            color: "#0B50A1",
+            fontWeight: 600,
+            marginTop: "auto",
+            paddingTop: 14,
+          }}
+        >
           YouTube에서 보기 ↗
         </div>
       </div>
