@@ -28,15 +28,9 @@ export default function HomeHero() {
     [0, 0.35, 0.5],
     ["#ffffff", "#ffffff", "#063d7a"],
   );
-  const wordScale = useTransform(scrollYProgress, [0, 0.42, 0.56], [1, 1.035, 1.16]);
-  const wordY = useTransform(scrollYProgress, [0.35, 0.58], ["0vh", "-10vh"]);
-  const wordOpacity = useTransform(scrollYProgress, [0.42, 0.6], [1, 0]);
-
-  // 실제 매장 로고가 나타나 확대한 뒤, 다음 콘텐츠로 자연스럽게 넘어간다.
-  const logoOpacity = useTransform(scrollYProgress, [0.56, 0.68, 0.96, 1], [0, 1, 1, 0]);
-  const logoScale = useTransform(scrollYProgress, [0.56, 0.74, 1], [0.84, 1, 1.55]);
-  const logoY = useTransform(scrollYProgress, [0.74, 1], ["0vh", "-2vh"]);
-  const introOpacity = useTransform(scrollYProgress, [0.975, 1], [1, 0]);
+  // 마지막 초록 장면에서도 타이포를 남긴다. 장면이 투명해지지 않고 그대로 다음 본문 위로 지나간다.
+  const wordScale = useTransform(scrollYProgress, [0, 0.42, 1], [1, 1.035, 1.08]);
+  const wordY = useTransform(scrollYProgress, [0.35, 0.56, 1], ["0vh", "0vh", "-7vh"]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.09], [1, 0]);
 
   useEffect(() => {
@@ -78,11 +72,7 @@ export default function HomeHero() {
 
   return (
     <div ref={sceneRef} className="home-intro-scroll">
-      <motion.section
-        className="home-intro"
-        aria-label="요넥스 동탄점 인트로"
-        style={reduce ? undefined : { opacity: introOpacity }}
-      >
+      <section className="home-intro" aria-label="요넥스 동탄점 인트로">
         <div className="home-intro__blue" aria-hidden />
         <motion.div
           className="home-intro__green"
@@ -96,7 +86,7 @@ export default function HomeHero() {
           style={
             reduce
               ? { color: "#fff" }
-              : { color: wordColor, scale: wordScale, y: wordY, opacity: wordOpacity }
+              : { color: wordColor, scale: wordScale, y: wordY }
           }
         >
           <span>
@@ -107,16 +97,6 @@ export default function HomeHero() {
             {typedDongtan}
             {typingStage === "dongtan" ? <i className="home-intro__cursor" /> : null}
           </span>
-        </motion.div>
-
-        <motion.div
-          className="home-intro__logo"
-          aria-hidden
-          style={reduce ? { opacity: 1, scale: 1 } : { opacity: logoOpacity, scale: logoScale, y: logoY }}
-        >
-          {/* 사이트 파비콘과 동일한 정사각 심볼. 흰 캔버스형 OG 이미지는 쓰지 않는다. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/icon.png" alt="" />
         </motion.div>
 
         {!reduce && (
@@ -140,7 +120,7 @@ export default function HomeHero() {
             </motion.svg>
           </motion.div>
         )}
-      </motion.section>
+      </section>
     </div>
   );
 }
