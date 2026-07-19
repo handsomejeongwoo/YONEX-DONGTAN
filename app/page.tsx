@@ -49,11 +49,11 @@ export default function HomePage() {
   const highlights = highlightRecords().slice(0, 3);
 
   return (
-    <div id="top" style={{ width: "100%", overflowX: "hidden" }}>
+    <div id="top" style={{ width: "100%", overflowX: "clip" }}>
       <Header variant="home" smartStoreUrl={store.smartStoreUrl} />
 
       {/* ===== HERO — 요넥스 동탄 브랜드 (파랑/초록 5:5 · motion) ===== */}
-      <HomeHero official={store.official} />
+      <HomeHero />
 
       {/* ===== 어떤 고민을 같이 봐드리나요 (white) ===== */}
       <section

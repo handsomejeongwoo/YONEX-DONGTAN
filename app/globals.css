@@ -24,6 +24,14 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* 구 Edge/IE */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none; /* Chrome/Safari */
 }
 
 body {
@@ -455,5 +463,115 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .home-hero__cursor {
     animation: none;
+  }
+}
+
+/* ===== 홈 인트로 — 파랑에서 초록으로, 실제 매장 로고를 지나 본문으로 ===== */
+.home-intro-scroll {
+  position: relative;
+  height: 340svh;
+  margin-top: -68px;
+}
+.home-intro {
+  position: sticky;
+  top: 0;
+  z-index: 90; /* 인트로가 끝나기 전에는 헤더도 보여주지 않는다. */
+  height: 100svh;
+  min-height: 560px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #fff;
+  pointer-events: none;
+  isolation: isolate;
+}
+.home-intro__blue,
+.home-intro__green {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.home-intro__blue {
+  background: #0757af;
+}
+.home-intro__green {
+  background: #0b9d35;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+.home-intro__word {
+  grid-area: 1 / 1;
+  display: grid;
+  gap: 0.02em;
+  text-align: center;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.055em;
+  line-height: 0.77;
+  will-change: transform, opacity;
+}
+.home-intro__word span {
+  display: block;
+  font-size: clamp(82px, 17.2vw, 286px);
+}
+.home-intro__logo {
+  grid-area: 1 / 1;
+  position: relative;
+  width: clamp(240px, 43vw, 700px);
+  aspect-ratio: 6.75 / 1;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(0, 43, 30, 0.16);
+  will-change: transform, opacity;
+}
+.home-intro__logo img {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  transform: translateY(-50%);
+  display: block;
+}
+.home-intro__hint {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(18px, 3vw, 30px);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+}
+.home-intro__hint span {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+}
+@media (max-width: 860px) {
+  .home-intro-scroll {
+    height: 300svh;
+  }
+  .home-intro__word {
+    line-height: 0.82;
+  }
+  .home-intro__word span {
+    font-size: clamp(60px, 19vw, 108px);
+  }
+  .home-intro__logo {
+    width: min(82vw, 440px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-intro-scroll {
+    height: calc(100svh - 68px);
+    margin-top: 0;
+  }
+  .home-intro {
+    position: relative;
+    min-height: 0;
   }
 }
