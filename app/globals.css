@@ -241,15 +241,21 @@ img {
 }
 
 /* ===== 홈 히어로 — 파랑/초록 5:5 수평 분할 (애니메이션은 motion 담당) ===== */
+.home-hero-scroll {
+  position: relative;
+  height: clamp(780px, 132svh, 1180px);
+}
 .home-hero {
   --hero-blue: #0159b3; /* 선명하고 단단한 요넥스 블루 */
   --hero-green: #0a9e31; /* 선명한 요넥스 그린 */
-  --hero-h: clamp(600px, 86vh, 760px);
-  position: relative;
+  --hero-h: calc(100svh - 68px);
+  position: sticky;
+  top: 68px;
   overflow: hidden;
   background: #fff; /* 최초 로드: 흰 캔버스 */
   color: #fff;
-  min-height: var(--hero-h);
+  height: var(--hero-h);
+  min-height: 600px;
 }
 /* 상단 50% 블루 / 하단 50% 그린 — 경계는 완전 수평. motion이 scaleY로 채운다. */
 .home-hero__blue,
@@ -283,22 +289,24 @@ img {
 .home-hero__inner {
   position: relative;
   z-index: 2;
-  max-width: 1200px;
-  margin: 0 auto;
-  min-height: var(--hero-h);
+  width: 100%;
+  height: 100%;
 }
-/* 왼쪽 카피: 좌측 정렬 + 히어로 전체 높이에서 수직 중앙정렬 */
-.home-hero__copy {
+/* 작은 대리점 라벨만 남기고, 히어로의 주인공은 큰 타이포로 둔다. */
+.home-hero__dealer {
   position: absolute;
-  left: 24px;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 34rem;
-  padding-right: 24px;
-  z-index: 2;
+  z-index: 3;
+  top: clamp(46px, 11vh, 100px);
+  left: clamp(24px, 8vw, 128px);
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 600;
+  font-size: clamp(12px, 1.1vw, 15px);
+  letter-spacing: 0.16em;
+  color: #e2eefb;
+  text-transform: uppercase;
 }
 .home-hero__tick {
   width: 22px;
@@ -348,18 +356,17 @@ img {
   gap: 12px;
   margin-top: clamp(22px, 3vw, 32px);
 }
-/* 큰 YONEX DONGTAN — 일반 타이포그래피. 블루/그린 경계를 straddle. 전부 보이게. */
+/* 큰 YONEX DONGTAN — 로고가 아닌, 포스터처럼 쓰는 타이포그래피. */
 .home-hero__type {
   position: absolute;
+  inset: 0;
   z-index: 2;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: right;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   font-family: "Barlow Condensed", sans-serif;
   text-transform: uppercase;
-  line-height: 0.84;
-  letter-spacing: -0.005em;
+  line-height: 0.76;
+  letter-spacing: -0.035em;
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
@@ -367,39 +374,54 @@ img {
 .home-hero__type b {
   display: block;
   font-weight: 700;
-  font-size: clamp(44px, 8vw, 124px);
+  font-size: clamp(96px, 18vw, 320px);
 }
 .home-hero__type .solid {
+  align-self: end;
+  justify-self: end;
+  margin: 0 7vw -0.045em 0;
   color: #fff;
 }
 .home-hero__type .line {
+  align-self: start;
+  justify-self: start;
+  margin: -0.015em 0 0 6vw;
   color: transparent;
-  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.92);
+  -webkit-text-stroke: 3px rgba(255, 255, 255, 0.92);
 }
 
-/* 모바일: 하단 그린을 비어 있는 배경이 아닌 브랜드 포스터로 쓴다. */
+/* 모바일: 동일한 포스터 구도를 유지하되, 글자를 중앙에 모아 여백을 정리한다. */
 @media (max-width: 860px) {
-  .home-hero {
-    --hero-h: clamp(660px, 92vh, 820px);
+  .home-hero-scroll {
+    height: max(820px, 122svh);
   }
-  .home-hero__copy {
-    bottom: auto;
-    height: 50%;
-    max-width: none;
+  .home-hero {
+    --hero-h: calc(100svh - 68px);
+    min-height: 620px;
+  }
+  .home-hero__dealer {
+    top: clamp(38px, 8vh, 72px);
+    left: 24px;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.13em;
   }
   .home-hero__type {
-    right: 0;
-    left: 0;
-    /* 그린 영역(50~100%)의 중심에 가까이 내려 자연스러운 여백을 만든다. */
-    top: 74%;
-    text-align: center;
+    line-height: 0.8;
   }
   .home-hero__type b {
-    /* 모바일 초록 영역 폭의 약 70%를 채우는 대형 브랜드 타이포. */
-    font-size: clamp(58px, 18vw, 94px);
+    font-size: clamp(64px, 19vw, 98px);
+  }
+  .home-hero__type .solid {
+    justify-self: center;
+    margin: 0 0 -0.04em;
+  }
+  .home-hero__type .line {
+    justify-self: center;
+    margin: -0.02em 0 0;
+    -webkit-text-stroke-width: 2px;
   }
   .home-hero__dots-green {
-    /* 크게 내려온 타이포와 경쟁하지 않도록 모바일에서는 하단 점선을 뺀다. */
     display: none;
   }
 }
