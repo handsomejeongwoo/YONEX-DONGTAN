@@ -26,7 +26,7 @@ export default function HomeHero() {
   const wordColor = useTransform(
     scrollYProgress,
     [0, 0.35, 0.5],
-    ["#ffffff", "#ffffff", "#063d7a"],
+    ["#ffffff", "#ffffff", "#e7ffb3"],
   );
   // 마지막 초록 장면에서도 타이포를 남긴다. 장면이 투명해지지 않고 그대로 다음 본문 위로 지나간다.
   const wordScale = useTransform(scrollYProgress, [0, 0.42, 1], [1, 1.035, 1.08]);
