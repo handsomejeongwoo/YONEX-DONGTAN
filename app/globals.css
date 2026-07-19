@@ -243,7 +243,8 @@ img {
 /* ===== 홈 히어로 — 파랑/초록 5:5 수평 분할 (애니메이션은 motion 담당) ===== */
 .home-hero-scroll {
   position: relative;
-  height: clamp(780px, 132svh, 1180px);
+  /* 스크롤은 이 장면 안에서만 소비한다. 다음 섹션은 타이포 퇴장 이후에만 올라온다. */
+  height: max(1520px, 240svh);
 }
 .home-hero {
   --hero-blue: #0159b3; /* 선명하고 단단한 요넥스 블루 */
@@ -297,7 +298,7 @@ img {
   position: absolute;
   z-index: 3;
   top: clamp(46px, 11vh, 100px);
-  left: clamp(24px, 8vw, 128px);
+  left: clamp(24px, 6vw, 96px);
   display: inline-flex;
   align-items: center;
   gap: 11px;
@@ -379,13 +380,36 @@ img {
 .home-hero__type .solid {
   align-self: end;
   justify-self: end;
+  width: 5.1ch;
   margin: 0 7vw -0.045em 0;
+  text-align: left;
   color: #fff;
+}
+.home-hero__cursor {
+  display: inline-block;
+  width: max(3px, 0.026em);
+  height: 0.64em;
+  margin-left: 0.07em;
+  vertical-align: 0.02em;
+  background: #fff;
+  animation: hero-cursor 0.72s steps(1, end) infinite;
+}
+@keyframes hero-cursor {
+  0%,
+  46% {
+    opacity: 1;
+  }
+  47%,
+  100% {
+    opacity: 0;
+  }
 }
 .home-hero__type .line {
   align-self: start;
   justify-self: start;
+  width: 7.1ch;
   margin: -0.015em 0 0 6vw;
+  text-align: left;
   color: transparent;
   -webkit-text-stroke: 3px rgba(255, 255, 255, 0.92);
 }
@@ -393,7 +417,7 @@ img {
 /* 모바일: 동일한 포스터 구도를 유지하되, 글자를 중앙에 모아 여백을 정리한다. */
 @media (max-width: 860px) {
   .home-hero-scroll {
-    height: max(820px, 122svh);
+    height: max(1520px, 230svh);
   }
   .home-hero {
     --hero-h: calc(100svh - 68px);
@@ -414,14 +438,22 @@ img {
   }
   .home-hero__type .solid {
     justify-self: center;
+    width: 5.1ch;
     margin: 0 0 -0.04em;
   }
   .home-hero__type .line {
     justify-self: center;
+    width: 7.1ch;
     margin: -0.02em 0 0;
     -webkit-text-stroke-width: 2px;
   }
   .home-hero__dots-green {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero__cursor {
+    animation: none;
   }
 }

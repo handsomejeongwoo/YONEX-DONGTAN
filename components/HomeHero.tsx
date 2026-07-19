@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
 // 요넥스 스포츠 톤: 빠르게 들어오고 단단하게 멈춘다(ease-out).
@@ -9,6 +9,11 @@ const EASE = [0.22, 0.61, 0.18, 1] as const;
 export default function HomeHero({ official }: { official: string }) {
   const reduce = useReducedMotion() ?? false;
   const sceneRef = useRef<HTMLElement>(null);
+  const [typedYonex, setTypedYonex] = useState(reduce ? "YONEX" : "");
+  const [typedDongtan, setTypedDongtan] = useState(reduce ? "DONGTAN" : "");
+  const [typingStage, setTypingStage] = useState<"yonex" | "dongtan" | "complete">(
+    reduce ? "complete" : "yonex",
+  );
   const { scrollYProgress } = useScroll({
     target: sceneRef,
     offset: ["start start", "end end"],
@@ -16,11 +21,56 @@ export default function HomeHero({ official }: { official: string }) {
 
   // 첫 스크롤 구간에서 두 단어가 코트 밖으로 밀려나는 느낌을 만든다.
   // vw 단위를 사용해 모바일에서도 화면 폭에 맞춰 이동 거리가 자연스럽게 줄어든다.
-  const yonexX = useTransform(scrollYProgress, [0, 0.72, 1], ["0vw", "-12vw", "-42vw"]);
-  const yonexY = useTransform(scrollYProgress, [0, 1], ["0vh", "-9vh"]);
-  const dongtanX = useTransform(scrollYProgress, [0, 0.72, 1], ["0vw", "12vw", "42vw"]);
-  const dongtanY = useTransform(scrollYProgress, [0, 1], ["0vh", "9vh"]);
+  const yonexX = useTransform(scrollYProgress, [0, 0.72, 1], ["0vw", "-14vw", "-54vw"]);
+  const yonexY = useTransform(scrollYProgress, [0, 1], ["0vh", "-11vh"]);
+  const dongtanX = useTransform(scrollYProgress, [0, 0.72, 1], ["0vw", "14vw", "54vw"]);
+  const dongtanY = useTransform(scrollYProgress, [0, 1], ["0vh", "11vh"]);
   const dotsX = useTransform(scrollYProgress, [0, 1], ["0vw", "-4vw"]);
+
+  useEffect(() => {
+    if (reduce) {
+      setTypedYonex("YONEX");
+      setTypedDongtan("DONGTAN");
+      setTypingStage("complete");
+      return;
+    }
+
+    let timer: number | undefined;
+    let cancelled = false;
+
+    const typeWord = (
+      word: string,
+      setWord: (value: string) => void,
+      done: () => void,
+    ) => {
+      let index = 0;
+      const next = () => {
+        if (cancelled) return;
+        index += 1;
+        setWord(word.slice(0, index));
+        if (index < word.length) {
+          timer = window.setTimeout(next, 120);
+        } else {
+          done();
+        }
+      };
+      next();
+    };
+
+    timer = window.setTimeout(() => {
+      typeWord("YONEX", setTypedYonex, () => {
+        setTypingStage("dongtan");
+        timer = window.setTimeout(() => {
+          typeWord("DONGTAN", setTypedDongtan, () => setTypingStage("complete"));
+        }, 180);
+      });
+    }, 900);
+
+    return () => {
+      cancelled = true;
+      if (timer !== undefined) window.clearTimeout(timer);
+    };
+  }, [reduce]);
 
   // 콘텐츠: 배경이 채워진 뒤(≈0.9s) 순서대로 등장.
   const line = (delay: number) => ({
@@ -127,19 +177,21 @@ export default function HomeHero({ official }: { official: string }) {
           aria-hidden
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: reduce ? 0 : 0.7, ease: EASE, delay: reduce ? 0 : 1.03 }}
+          transition={{ duration: reduce ? 0 : 0.45, ease: EASE, delay: reduce ? 0 : 0.72 }}
         >
           <motion.b
             className="solid"
             style={reduce ? undefined : { x: yonexX, y: yonexY }}
           >
-            YONEX
+            {typedYonex}
+            {typingStage === "yonex" ? <span className="home-hero__cursor" /> : null}
           </motion.b>
           <motion.b
             className="line"
             style={reduce ? undefined : { x: dongtanX, y: dongtanY }}
           >
-            DONGTAN
+            {typedDongtan}
+            {typingStage === "dongtan" ? <span className="home-hero__cursor" /> : null}
           </motion.b>
         </motion.div>
         </div>
