@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
 // 초대형 가로 타이포 트랙 — 화면보다 훨씬 넓게 반복해 좌우가 잘리고, 스크롤에 맞춰 가로로 흐른다.
-const TRACK = "YONEX DONGTAN  ·  ".repeat(6);
+const TRACK_REPEAT_COUNT = 6;
 
 export default function HomeHero() {
   const reduce = useReducedMotion() ?? false;
@@ -50,6 +50,7 @@ export default function HomeHero() {
   const hintOpacity = useTransform(p, [0, 0.16], [1, 0]);
   // 인트로 후반 약 30%를 타이포에 배정해, 가로 흐름을 충분히 오래 보여준다.
   const typeOpacity = useTransform(p, [0.7, 0.77], [0, 1]);
+  const mobileTypeY = useTransform(p, [0.7, 0.78], ["10vh", "0vh"]);
   const track1X = useTransform(p, [0.7, 1], ["14vw", "-110vw"]);
   const track2X = useTransform(p, [0.7, 1], ["-42vw", "-166vw"]);
 
@@ -84,11 +85,33 @@ export default function HomeHero() {
         {/* 초대형 가로 타이포 (초록 장면) */}
         <motion.div className="home-intro__type" aria-hidden style={{ opacity: typeOpacity }}>
           <motion.div className="home-intro__track" style={{ x: track1X }}>
-            {TRACK}
+            {Array.from({ length: TRACK_REPEAT_COUNT }, (_, index) => (
+              <span className="home-intro__track-pair" key={`top-${index}`}>
+                <span className="home-intro__yonex">YONEX</span>
+                <span className="home-intro__dongtan">DONGTAN</span>
+                <span className="home-intro__separator">·</span>
+              </span>
+            ))}
           </motion.div>
           <motion.div className="home-intro__track" style={{ x: track2X }}>
-            {TRACK}
+            {Array.from({ length: TRACK_REPEAT_COUNT }, (_, index) => (
+              <span className="home-intro__track-pair" key={`bottom-${index}`}>
+                <span className="home-intro__yonex">YONEX</span>
+                <span className="home-intro__dongtan">DONGTAN</span>
+                <span className="home-intro__separator">·</span>
+              </span>
+            ))}
           </motion.div>
+        </motion.div>
+
+        {/* 모바일은 가로 트랙 대신 중앙 타이포가 올라와 고정된다. */}
+        <motion.div
+          className="home-intro__mobile-type"
+          aria-hidden
+          style={{ opacity: typeOpacity, y: mobileTypeY }}
+        >
+          <span className="home-intro__yonex">YONEX</span>
+          <span className="home-intro__dongtan">DONGTAN</span>
         </motion.div>
 
         {/* 제공된 검정 요넥스 심볼 — 타이포 장면 전 완전히 퇴장 */}

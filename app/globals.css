@@ -509,6 +509,8 @@ img {
   pointer-events: none;
 }
 .home-intro__track {
+  display: flex;
+  width: max-content;
   white-space: nowrap;
   font-family: "Barlow Condensed", sans-serif;
   font-weight: 700;
@@ -516,8 +518,30 @@ img {
   letter-spacing: -0.02em;
   line-height: 0.86;
   font-size: clamp(120px, 30vh, 380px);
-  color: #fff; /* 초록 배경 위에서 또렷하게 유지 */
   will-change: transform;
+}
+.home-intro__track-pair {
+  display: inline-flex;
+  align-items: baseline;
+  margin-right: 0.16em;
+}
+.home-intro__yonex {
+  color: transparent;
+  -webkit-text-stroke: clamp(1.5px, 0.17vw, 3px) #fff;
+  text-stroke: clamp(1.5px, 0.17vw, 3px) #fff;
+}
+.home-intro__dongtan,
+.home-intro__separator {
+  color: #fff;
+}
+.home-intro__track .home-intro__dongtan {
+  margin-left: 0.17em;
+}
+.home-intro__separator {
+  margin-left: 0.25em;
+}
+.home-intro__mobile-type {
+  display: none;
 }
 /* 시작 심볼 — 파비콘이 아닌 제공된 검정 요넥스 마크 원본 */
 .home-intro__symbol {
@@ -591,6 +615,35 @@ img {
   }
   .home-intro__track {
     font-size: clamp(84px, 22vh, 220px);
+  }
+}
+@media (max-width: 640px) {
+  .home-intro__type {
+    display: none;
+  }
+  .home-intro__mobile-type {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: clamp(74px, 23vw, 132px);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 0.78;
+    text-align: center;
+    pointer-events: none;
+  }
+  .home-intro__mobile-type span {
+    display: block;
+  }
+  .home-intro__mobile-type .home-intro__yonex {
+    -webkit-text-stroke-width: 1.5px;
+    text-stroke-width: 1.5px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
