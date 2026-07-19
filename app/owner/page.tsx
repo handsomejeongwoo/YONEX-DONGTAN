@@ -170,15 +170,13 @@ export default function OwnerPage() {
             {/* 텍스트 (정렬 · 절제) */}
             <div>
               <div
-                data-reveal
-                data-reveal-delay="1"
+                className="owner-profile-reveal owner-profile-reveal--1"
                 style={{ ...EYEBROW, color: "var(--blue)", marginBottom: 12 }}
               >
                 YONEX DONGTAN CEO · PLAYER
               </div>
               <div
-                data-reveal
-                data-reveal-delay="2"
+                className="owner-profile-reveal owner-profile-reveal--2"
                 style={{
                   fontFamily: "'Barlow Condensed',sans-serif",
                   fontWeight: 700,
@@ -191,8 +189,7 @@ export default function OwnerPage() {
                 HONG SEUNG IN
               </div>
               <h1
-                data-reveal
-                data-reveal-delay="3"
+                className="owner-profile-reveal owner-profile-reveal--3"
                 style={{
                   fontSize: "clamp(34px,5vw,58px)",
                   fontWeight: 800,
@@ -204,8 +201,7 @@ export default function OwnerPage() {
                 홍승인
               </h1>
               <div
-                data-reveal
-                data-reveal-delay="4"
+                className="owner-profile-reveal owner-profile-reveal--4"
                 style={{
                   ...EYEBROW,
                   color: "var(--ink-soft)",
@@ -215,8 +211,7 @@ export default function OwnerPage() {
                 Owner · Player
               </div>
               <p
-                data-reveal
-                data-reveal-delay="5"
+                className="owner-profile-reveal owner-profile-reveal--5"
                 style={{
                   fontSize: "clamp(18px,2.2vw,22px)",
                   fontWeight: 600,
@@ -232,8 +227,7 @@ export default function OwnerPage() {
                 매장에서 함께 맞춥니다.
               </p>
               <div
-                data-reveal
-                data-reveal-delay="6"
+                className="owner-profile-reveal owner-profile-reveal--6"
                 style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 28 }}
               >
                 <a href="#records" className="btn btn-primary">

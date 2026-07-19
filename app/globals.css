@@ -241,19 +241,34 @@ img {
 [data-reveal] {
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
-[data-reveal][data-reveal-delay="1"] { transition-delay: 80ms; }
-[data-reveal][data-reveal-delay="2"] { transition-delay: 140ms; }
-[data-reveal][data-reveal-delay="3"] { transition-delay: 200ms; }
-[data-reveal][data-reveal-delay="4"] { transition-delay: 260ms; }
-[data-reveal][data-reveal-delay="5"] { transition-delay: 320ms; }
-[data-reveal][data-reveal-delay="6"] { transition-delay: 380ms; }
+
+/* 오너 프로필은 첫 진입 장면이므로, 공통 스크롤 리빌과 분리해 확실히 순차 등장시킨다. */
+.owner-profile-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  animation: owner-profile-reveal 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.owner-profile-reveal--1 { animation-delay: 0.16s; }
+.owner-profile-reveal--2 { animation-delay: 0.26s; }
+.owner-profile-reveal--3 { animation-delay: 0.36s; }
+.owner-profile-reveal--4 { animation-delay: 0.46s; }
+.owner-profile-reveal--5 { animation-delay: 0.58s; }
+.owner-profile-reveal--6 { animation-delay: 0.7s; }
+@keyframes owner-profile-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   [data-reveal].is-hidden {
     opacity: 1;
     transform: none;
   }
-  [data-reveal][data-reveal-delay] {
-    transition-delay: 0ms;
+  .owner-profile-reveal {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
 
