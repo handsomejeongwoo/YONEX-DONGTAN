@@ -114,9 +114,9 @@ export default function HomeHero() {
           aria-hidden
           style={reduce ? { opacity: 1, scale: 1 } : { opacity: logoOpacity, scale: logoScale, y: logoY }}
         >
-          {/* 공유 미리보기와 동일한 OG 이미지. 새 심볼을 그려 넣지 않는다. */}
+          {/* 사이트 파비콘과 동일한 정사각 심볼. 흰 캔버스형 OG 이미지는 쓰지 않는다. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/og-image.png" alt="" />
+          <img src="/icon.png" alt="" />
         </motion.div>
 
         {!reduce && (
