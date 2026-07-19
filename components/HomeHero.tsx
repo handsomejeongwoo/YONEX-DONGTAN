@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
   motion,
-  useMotionValueEvent,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -12,7 +11,6 @@ import {
 export default function HomeHero() {
   const reduce = useReducedMotion() ?? false;
   const sceneRef = useRef<HTMLDivElement>(null);
-  const [hasEntered, setHasEntered] = useState(false);
   const [typedYonex, setTypedYonex] = useState(reduce ? "YONEX" : "");
   const [typedDongtan, setTypedDongtan] = useState(reduce ? "DONGTAN" : "");
   const [typingStage, setTypingStage] = useState<"yonex" | "dongtan" | "complete">(
@@ -40,11 +38,6 @@ export default function HomeHero() {
   const logoY = useTransform(scrollYProgress, [0.74, 1], ["0vh", "-2vh"]);
   const introOpacity = useTransform(scrollYProgress, [0.975, 1], [1, 0]);
   const hintOpacity = useTransform(scrollYProgress, [0, 0.09], [1, 0]);
-
-  // 새로고침 전까지는 한 번만 실행한다. 끝까지 진입한 뒤 위로 돌아와도 인트로를 다시 만들지 않는다.
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (!reduce && latest >= 0.985) setHasEntered(true);
-  });
 
   useEffect(() => {
     if (reduce) {
@@ -82,8 +75,6 @@ export default function HomeHero() {
       if (timer !== undefined) window.clearTimeout(timer);
     };
   }, [reduce]);
-
-  if (hasEntered) return null;
 
   return (
     <div ref={sceneRef} className="home-intro-scroll">
