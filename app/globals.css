@@ -175,6 +175,93 @@ img {
   }
 }
 
+/* --- 홈 배너 캐러셀 (화면 폭 전체) --- */
+.home-banner {
+  position: relative;
+  width: 100%;
+  background: #0b1116;
+}
+.home-banner__stage {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* 좌우 화살표 — 데스크톱에서 호버 시에만 */
+.home-banner__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 999px;
+  background: rgba(16, 34, 44, 0.4);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  padding: 0 0 3px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+.home-banner:hover .home-banner__nav {
+  opacity: 1;
+}
+.home-banner__nav:hover {
+  background: rgba(16, 34, 44, 0.72);
+}
+.home-banner__nav:focus-visible {
+  opacity: 1;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.home-banner__nav--prev {
+  left: clamp(10px, 2vw, 22px);
+}
+.home-banner__nav--next {
+  right: clamp(10px, 2vw, 22px);
+}
+@media (hover: none), (max-width: 767px) {
+  .home-banner__nav {
+    display: none;
+  }
+}
+
+/* 인디케이터 — 어떤 이미지 위에서도 보이도록 알약 배경 위에 */
+.home-banner__dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(10px, 1.6vw, 18px);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(11, 17, 22, 0.32);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+}
+.home-banner__dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.home-banner__dot--on {
+  width: 22px;
+  background: #fff;
+}
+
 /* --- 상단 공지 바 --- */
 .notice-bar {
   background: var(--green, #1f9d55);

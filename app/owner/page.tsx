@@ -115,7 +115,7 @@ export default async function OwnerPage() {
     getStore(),
     getOwner(),
     getAllRecords(),
-    getOwnerMatchVideos(4),
+    getOwnerMatchVideos(6),
     getOwnerGearVideos(2),
     getFeaturedInstagram(6),
   ]);

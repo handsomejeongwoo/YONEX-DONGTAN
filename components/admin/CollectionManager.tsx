@@ -7,6 +7,8 @@ import {
   formatWon,
   toPercent,
   toWon,
+  PRODUCT_LIMIT,
+  VIDEO_PLACEMENTS,
   type CollectionType,
   type Field,
 } from "@/lib/admin/collections";
@@ -18,6 +20,11 @@ const API = (type: string, rest = "") =>
   `/api/admin/collections/${type}${rest}`; // rest 는 "/id" 또는 "/reorder"
 
 function toFormValue(field: Field, item?: Item): string | boolean {
+  // 노출 위치 체크박스는 tags 배열에서 읽는다. 새 항목은 기본 해제.
+  if (field.fromTag) {
+    const t = item?.tags;
+    return Array.isArray(t) ? t.includes(field.fromTag) : false;
+  }
   const v = item?.[field.name];
   if (field.type === "checkbox") return v === undefined ? true : Boolean(v);
   if (field.type === "tags") return Array.isArray(v) ? v.join(", ") : "";
@@ -49,6 +56,41 @@ export default function CollectionManager({
     () => def.fields.filter((f) => f.primary),
     [def.fields],
   );
+
+  /** 노출 개수 제한 안내 문구 */
+  const limitNote =
+    type === "products"
+      ? `공개 상품 중 위에서 ${PRODUCT_LIMIT}개만 홈에 표시됩니다.`
+      : type === "youtube"
+        ? VIDEO_PLACEMENTS.map((p) => `${p.section} ${p.limit}개`).join(" · ") +
+          "까지 표시됩니다."
+        : null;
+
+  /**
+   * 각 항목이 실제로 웹에 노출되는지 계산한다.
+   * - 상품: 공개 항목 중 앞에서 PRODUCT_LIMIT 개
+   * - 영상: 자리(태그)별로 공개 항목 중 앞에서 각 limit 개
+   */
+  const exposure = useMemo(() => {
+    const shown = items.filter((it) => (it.visible ?? true) !== false);
+    if (type === "products") {
+      const ids = new Set(shown.slice(0, PRODUCT_LIMIT).map((it) => String(it.id)));
+      return { kind: "product" as const, ids };
+    }
+    if (type === "youtube") {
+      const byPlacement: Record<string, Set<string>> = {};
+      for (const p of VIDEO_PLACEMENTS) {
+        const inPlacement = shown.filter(
+          (it) => Array.isArray(it.tags) && (it.tags as string[]).includes(p.tag),
+        );
+        byPlacement[p.tag] = new Set(
+          inPlacement.slice(0, p.limit).map((it) => String(it.id)),
+        );
+      }
+      return { kind: "youtube" as const, byPlacement };
+    }
+    return { kind: "none" as const };
+  }, [items, type]);
 
   function flash(msg: string) {
     setToast(msg);
@@ -173,6 +215,11 @@ export default function CollectionManager({
           <p style={{ fontSize: 13, color: "#8ea3ab", margin: "4px 0 0" }}>
             총 {items.length}개 · 위/아래 버튼으로 노출 순서를 바꿉니다.
           </p>
+          {limitNote && (
+            <p style={{ fontSize: 13, color: "#0b50a1", fontWeight: 600, margin: "6px 0 0" }}>
+              {limitNote}
+            </p>
+          )}
         </div>
         <button
           type="button"
@@ -243,6 +290,45 @@ export default function CollectionManager({
                       }
                       return <span key={f.name}>{f.label}: {String(val)}</span>;
                     })}
+
+                  {/* 어느 섹션에 실제로 노출되는지 */}
+                  {exposure.kind === "youtube" &&
+                    VIDEO_PLACEMENTS.filter(
+                      (p) =>
+                        Array.isArray(item.tags) &&
+                        (item.tags as string[]).includes(p.tag),
+                    ).map((p) => {
+                      const on = exposure.byPlacement[p.tag]?.has(String(item.id));
+                      return (
+                        <span
+                          key={p.tag}
+                          title={
+                            on
+                              ? `${p.section} 에 노출 중`
+                              : `${p.section} 는 ${p.limit}개까지만 노출됩니다`
+                          }
+                          style={{
+                            padding: "2px 7px",
+                            borderRadius: 3,
+                            fontWeight: 700,
+                            fontSize: 11.5,
+                            background: on ? "#eaf1fb" : "#f1f3f5",
+                            color: on ? "#0b50a1" : "#a9b4ba",
+                          }}
+                        >
+                          {p.section}
+                          {!on && " 대기"}
+                        </span>
+                      );
+                    })}
+
+                  {exposure.kind === "product" &&
+                    visible &&
+                    !exposure.ids.has(String(item.id)) && (
+                      <span style={{ color: "#a9b4ba", fontWeight: 700 }}>
+                        웹 미표시 ({PRODUCT_LIMIT}개 초과)
+                      </span>
+                    )}
                 </div>
               </div>
 
@@ -396,6 +482,36 @@ function FormModal({
   const set = (name: string, value: string | boolean) =>
     setForm((prev) => ({ ...prev, [name]: value }));
 
+  const [lookup, setLookup] = useState<string | null>(null);
+
+  /** 유튜브 URL 을 넣으면 제목을 대신 가져와 채운다(비어 있을 때만). */
+  async function fillFromYoutube(url: string) {
+    if (!url.trim()) return;
+    setLookup("영상 정보를 가져오는 중…");
+    try {
+      const res = await fetch(
+        `/api/admin/youtube-info/?url=${encodeURIComponent(url)}`,
+      );
+      const d = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        title?: string;
+        error?: string;
+      };
+      if (d.ok && d.title) {
+        setForm((prev) =>
+          String(prev.title ?? "").trim()
+            ? prev
+            : { ...prev, title: d.title as string },
+        );
+        setLookup(`제목: ${d.title}`);
+      } else {
+        setLookup(d.error ?? "영상 정보를 가져오지 못했습니다.");
+      }
+    } catch {
+      setLookup("영상 정보를 가져오지 못했습니다.");
+    }
+  }
+
   return (
     <div
       onClick={onClose}
@@ -438,7 +554,15 @@ function FormModal({
                 value={form[f.name]}
                 onChange={(v) => set(f.name, v)}
                 folder={folder}
+                onBlur={
+                  folder === "youtube" && f.name === "url"
+                    ? () => fillFromYoutube(String(form.url ?? ""))
+                    : undefined
+                }
               />
+              {folder === "youtube" && f.name === "url" && lookup && (
+                <span style={{ fontSize: 12, color: "#0b50a1" }}>{lookup}</span>
+              )}
               {f.help && (
                 <span style={{ fontSize: 12, color: "#9aa7ad" }}>{f.help}</span>
               )}
@@ -578,11 +702,13 @@ function FieldInput({
   value,
   onChange,
   folder,
+  onBlur,
 }: {
   field: Field;
   value: string | boolean | undefined;
   onChange: (v: string | boolean) => void;
   folder: string;
+  onBlur?: () => void;
 }) {
   if (field.type === "image") {
     return (
@@ -635,6 +761,7 @@ function FieldInput({
       type={field.type === "number" ? "number" : "text"}
       value={String(value ?? "")}
       onChange={(e) => onChange(e.target.value)}
+      onBlur={onBlur}
       placeholder={field.placeholder}
       style={inputBase}
     />

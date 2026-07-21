@@ -1,6 +1,7 @@
 import "server-only";
 import { cache } from "react";
 import { readContent } from "@/lib/repository/content-repository";
+import { PRODUCT_LIMIT } from "@/lib/admin/collections";
 import type {
   Content,
   YoutubeItem,
@@ -72,7 +73,10 @@ export async function getActiveBanners(): Promise<Banner[]> {
 /** 공개 추천 상품(order 순). */
 export async function getFeaturedProducts(): Promise<FeaturedProduct[]> {
   const { products } = await loadContent();
-  return [...(products ?? [])].filter(isVisible).sort(byOrder);
+  return [...(products ?? [])]
+    .filter(isVisible)
+    .sort(byOrder)
+    .slice(0, PRODUCT_LIMIT);
 }
 
 /** 공개 유튜브 영상 전체(관리 순서 우선, 없으면 최신순). */
@@ -92,7 +96,7 @@ export async function getYoutubeByTag(tag: string): Promise<YoutubeItem[]> {
 }
 
 /** 홈 상단 영상: `home-latest` 우선, 모자라면 나머지로 채움. */
-export async function getHomeVideos(count = 3): Promise<YoutubeItem[]> {
+export async function getHomeVideos(count = 6): Promise<YoutubeItem[]> {
   const all = await visibleYoutube();
   const tagged = all.filter((v) => v.tags.includes("home-latest"));
   if (tagged.length >= count) return tagged.slice(0, count);
@@ -101,7 +105,7 @@ export async function getHomeVideos(count = 3): Promise<YoutubeItem[]> {
 }
 
 /** 사장님 페이지 경기·대회 영상. */
-export async function getOwnerMatchVideos(count = 4): Promise<YoutubeItem[]> {
+export async function getOwnerMatchVideos(count = 6): Promise<YoutubeItem[]> {
   const all = await visibleYoutube();
   const tagged = all.filter((v) => v.tags.includes("owner-match"));
   if (tagged.length >= count) return tagged.slice(0, count);

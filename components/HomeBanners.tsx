@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { Banner } from "@/lib/types";
 
@@ -9,56 +9,77 @@ const INTERVAL = 6000;
 
 /**
  * 홈 배너 캐러셀.
- * 문구·버튼이 그려진 완성 이미지를 그대로 띄운다(웹에서 텍스트를 얹지 않음).
+ *
+ * 문구·버튼이 그려진 완성 이미지를 화면 폭 전체로 띄운다.
+ * 첫 이미지를 숨긴 채로 흘려 높이를 잡고, 실제 슬라이드는 그 위에
+ * 절대배치해서 전환 중에도 레이아웃이 흔들리지 않게 한다.
  */
 export default function HomeBanners({ banners }: { banners: Banner[] }) {
   const reduce = useReducedMotion() ?? false;
-  const [index, setIndex] = useState(0);
+  const [[index, dir], setState] = useState<[number, number]>([0, 0]);
   const [paused, setPaused] = useState(false);
   const timer = useRef<number | null>(null);
 
   const items = banners.filter((b) => b.image);
   const count = items.length;
 
+  const go = useCallback(
+    (d: number) => setState(([i]) => [(i + d + count) % count, d]),
+    [count],
+  );
+  const jump = useCallback(
+    (to: number) => setState(([i]) => [to, to > i ? 1 : -1]),
+    [],
+  );
+
   useEffect(() => {
-    if (count <= 1 || paused || reduce) return;
-    timer.current = window.setInterval(
-      () => setIndex((i) => (i + 1) % count),
-      INTERVAL,
-    );
+    if (count <= 1 || paused) return;
+    timer.current = window.setInterval(() => go(1), INTERVAL);
     return () => {
       if (timer.current) window.clearInterval(timer.current);
     };
-  }, [count, paused, reduce]);
+  }, [count, paused, go]);
 
   if (count === 0) return null;
 
   const b = items[Math.min(index, count - 1)];
 
-  const image = (
+  const slide = (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={b.image}
       alt={b.title || ""}
-      style={{ width: "100%", height: "auto", display: "block" }}
+      style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
     />
   );
 
   return (
     <section
+      className="home-banner"
       aria-label="배너"
+      aria-roledescription="carousel"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      style={{ background: "var(--paper)", position: "relative" }}
     >
-      <div style={{ maxWidth: 1440, margin: "0 auto", position: "relative" }}>
-        <AnimatePresence mode="wait">
+      <div className="home-banner__stage">
+        {/* 높이 기준자 — 보이지 않지만 자리를 차지해 컨테이너 높이를 만든다 */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={items[0].image}
+          alt=""
+          aria-hidden="true"
+          style={{ width: "100%", height: "auto", display: "block", visibility: "hidden" }}
+        />
+
+        <AnimatePresence initial={false} custom={dir} mode="popLayout">
           <motion.div
             key={b.id}
-            initial={reduce ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={reduce ? undefined : { opacity: 0 }}
-            transition={{ duration: 0.4, ease: EASE }}
+            custom={dir}
+            initial={reduce ? { opacity: 0 } : { opacity: 0, x: dir >= 0 ? "8%" : "-8%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, x: dir >= 0 ? "-8%" : "8%" }}
+            transition={{ duration: 0.55, ease: EASE }}
+            style={{ position: "absolute", inset: 0 }}
           >
             {b.href ? (
               <a
@@ -67,50 +88,52 @@ export default function HomeBanners({ banners }: { banners: Banner[] }) {
                 {...(/^https?:/.test(b.href)
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
-                style={{ display: "block" }}
+                style={{ display: "block", width: "100%", height: "100%" }}
               >
-                {image}
+                {slide}
               </a>
             ) : (
-              image
+              slide
             )}
           </motion.div>
         </AnimatePresence>
 
         {count > 1 && (
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              bottom: 12,
-              display: "flex",
-              justifyContent: "center",
-              gap: 8,
-            }}
-          >
-            {items.map((item, i) => (
-              <button
-                key={item.id}
-                type="button"
-                aria-label={`${i + 1}번째 배너 보기`}
-                aria-current={i === index}
-                onClick={() => setIndex(i)}
-                style={{
-                  width: i === index ? 24 : 9,
-                  height: 9,
-                  padding: 0,
-                  border: "none",
-                  borderRadius: 999,
-                  cursor: "pointer",
-                  background:
-                    i === index ? "rgba(255,255,255,.95)" : "rgba(255,255,255,.5)",
-                  boxShadow: "0 0 0 1px rgba(0,0,0,.12)",
-                  transition: "width .25s ease",
-                }}
-              />
-            ))}
-          </div>
+          <>
+            <button
+              type="button"
+              className="home-banner__nav home-banner__nav--prev"
+              aria-label="이전 배너"
+              onClick={() => go(-1)}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="home-banner__nav home-banner__nav--next"
+              aria-label="다음 배너"
+              onClick={() => go(1)}
+            >
+              ›
+            </button>
+
+            <div className="home-banner__dots">
+              {items.map((item, i) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-label={`${i + 1}번째 배너 보기`}
+                  aria-current={i === index}
+                  onClick={() => jump(i)}
+                  className={
+                    i === index
+                      ? "home-banner__dot home-banner__dot--on"
+                      : "home-banner__dot"
+                  }
+                />
+              ))}
+            </div>
+          </>
         )}
       </div>
     </section>

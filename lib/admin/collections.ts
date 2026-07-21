@@ -23,7 +23,25 @@ export interface Field {
   required?: boolean;
   /** 목록 테이블에 보일 대표 컬럼인지. */
   primary?: boolean;
+  /**
+   * 체크박스를 tags 배열의 특정 태그와 연결한다.
+   * 저장은 tags 로 하되 관리 화면에서는 체크박스로 보여주기 위한 것.
+   */
+  fromTag?: string;
 }
+
+/**
+ * 영상이 노출될 자리와 각 자리의 최대 노출 개수.
+ * 등록 화면에서는 체크박스로 고르고, 실제 저장은 tags 로 한다.
+ */
+export const VIDEO_PLACEMENTS = [
+  { field: "inHome", tag: "home-latest", label: "홈 최신 영상", section: "VIDEOS", limit: 6 },
+  { field: "inMatch", tag: "owner-match", label: "경기·대회 영상", section: "MATCH FILM", limit: 6 },
+  { field: "inGear", tag: "owner-gear", label: "장비 리뷰", section: "GEAR TALK", limit: 2 },
+] as const;
+
+/** 추천 상품이 홈에 노출되는 최대 개수. */
+export const PRODUCT_LIMIT = 6;
 
 export type CollectionType =
   | "products"
@@ -151,13 +169,16 @@ export const COLLECTIONS: Record<CollectionType, CollectionDef> = {
     singular: "영상",
     titleField: "title",
     fields: [
-      { name: "url", label: "유튜브 URL", type: "url", required: true, primary: true, placeholder: "https://youtube.com/watch?v=… 또는 /shorts/…", help: "붙여넣으면 영상ID·썸네일·타입 자동 추출" },
+      { name: "url", label: "유튜브 URL", type: "url", required: true, primary: true, placeholder: "https://youtube.com/watch?v=… 또는 /shorts/…", help: "붙여넣으면 제목·썸네일·쇼츠 여부를 자동으로 채웁니다" },
       { name: "title", label: "제목", type: "text", required: true, primary: true },
-      { name: "type", label: "타입", type: "select", options: [ { value: "video", label: "일반 영상" }, { value: "short", label: "쇼츠" } ] },
-      { name: "category", label: "카테고리", type: "text", placeholder: "장비 리뷰 / 경기 영상 …" },
-      { name: "badge", label: "배지", type: "text", placeholder: "GEAR REVIEW / MATCH …" },
-      { name: "publishedAt", label: "게시일", type: "text", placeholder: "2026-07-14" },
-      { name: "tags", label: "태그", type: "tags", help: "노출 위치 태그 (home-latest, owner-gear …)" },
+      { name: "category", label: "카테고리", type: "text", placeholder: "장비 리뷰 / 경기 영상 / 일상 브이로그 …" },
+      // 어느 섹션에 띄울지 — 저장은 tags 로 되지만 화면에서는 체크박스로 고른다.
+      ...VIDEO_PLACEMENTS.map((p) => ({
+        name: p.field,
+        label: `${p.label} (${p.section})`,
+        type: "checkbox" as const,
+        fromTag: p.tag,
+      })),
       { name: "visible", label: "공개", type: "checkbox" },
     ],
   },
@@ -296,15 +317,23 @@ export function normalize(
       if (has("title")) out.title = str(raw.title);
       if (has("type")) out.type = str(raw.type) === "short" ? "short" : "video";
       if (has("category")) out.category = str(raw.category);
-      if (has("badge")) out.badge = str(raw.badge);
-      if (has("publishedAt")) out.publishedAt = str(raw.publishedAt);
-      if (has("tags")) out.tags = tags(raw.tags);
       if (has("visible")) out.visible = bool(raw.visible);
+
+      // 노출 위치 체크박스 → tags. 체크박스가 하나라도 오면 통째로 다시 만든다
+      // (공개 토글처럼 체크박스가 안 온 요청에서는 기존 tags 를 건드리지 않는다).
+      if (VIDEO_PLACEMENTS.some((p) => has(p.field))) {
+        out.tags = VIDEO_PLACEMENTS.filter((p) => bool(raw[p.field])).map((p) => p.tag);
+      } else if (has("tags")) {
+        out.tags = tags(raw.tags);
+      }
+
       if (mode === "create") {
         out.tags = out.tags ?? [];
-        out.badge = out.badge ?? "";
         out.category = out.category ?? "";
         out.visible = has("visible") ? out.visible : true;
+        // 배지·게시일은 입력받지 않고 자동으로 채운다.
+        out.badge = out.type === "short" ? "SHORTS" : str(raw.badge);
+        out.publishedAt = str(raw.publishedAt) || new Date().toISOString().slice(0, 10);
       }
       break;
     }

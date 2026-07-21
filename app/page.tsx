@@ -36,7 +36,7 @@ export default async function HomePage() {
   const [store, videos, allHighlights, products, banners, notice] =
     await Promise.all([
       getStore(),
-      getHomeVideos(3),
+      getHomeVideos(6),
       getHighlightRecords(),
       getFeaturedProducts(),
       getActiveBanners(),
@@ -60,8 +60,70 @@ export default async function HomePage() {
       {/* ===== 관리자 배너 (등록된 경우에만) ===== */}
       <HomeBanners banners={banners} />
 
-      {/* ===== 사장님 신뢰 근거 (짧게) — mist ===== */}
-      <section style={{ padding: "clamp(56px,8vw,88px) 0", background: "var(--mist)" }}>
+      {/* ===== SMART STORE PICKS — white ===== */}
+      <SmartStorePicks products={products} />
+
+      {/* ===== 유튜브 최신 영상 — mist ===== */}
+      <section
+        id="videos"
+        style={{
+          scrollMarginTop: 80,
+          padding: "clamp(64px,9vw,104px) 0",
+          background: "var(--mist)",
+        }}
+      >
+        <div style={WRAP}>
+          <div data-reveal style={{ ...EYEBROW, color: "var(--blue)" }}>
+            Videos
+          </div>
+          <h2
+            data-reveal
+            style={{
+              fontSize: "clamp(28px,4.4vw,48px)",
+              lineHeight: 1.12,
+              letterSpacing: "-0.04em",
+              fontWeight: 800,
+              margin: "12px 0 0",
+            }}
+          >
+            최신 영상
+          </h2>
+          {videos.length > 0 ? (
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "repeat(auto-fit,minmax(min(100%,280px),1fr))",
+                gap: 16,
+                marginTop: "clamp(28px,4vw,44px)",
+              }}
+            >
+              {videos.map((v) => (
+                <div key={v.id} data-reveal style={{ display: "flex" }}>
+                  <VideoCard item={v} variant="home" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p style={{ marginTop: 24, color: "var(--ink-soft)" }}>
+              곧 새로운 영상을 올릴 예정입니다.
+            </p>
+          )}
+          <div data-reveal style={{ marginTop: 22 }}>
+            <a
+              href={store.youtubeChannelUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontSize: 15, fontWeight: 700, color: "var(--blue)" }}
+            >
+              채널 전체 보기 ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 사장님 신뢰 근거 (짧게) — white (앞의 영상 섹션이 mist 라 대비) ===== */}
+      <section style={{ padding: "clamp(56px,8vw,88px) 0", background: "var(--paper)" }}>
         <div style={WRAP}>
           <div
             data-reveal
@@ -178,68 +240,6 @@ export default async function HomePage() {
                 </a>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SMART STORE PICKS — white ===== */}
-      <SmartStorePicks products={products} />
-
-      {/* ===== 유튜브 최신 영상 3 — mist ===== */}
-      <section
-        id="videos"
-        style={{
-          scrollMarginTop: 80,
-          padding: "clamp(64px,9vw,104px) 0",
-          background: "var(--mist)",
-        }}
-      >
-        <div style={WRAP}>
-          <div data-reveal style={{ ...EYEBROW, color: "var(--blue)" }}>
-            Videos
-          </div>
-          <h2
-            data-reveal
-            style={{
-              fontSize: "clamp(28px,4.4vw,48px)",
-              lineHeight: 1.12,
-              letterSpacing: "-0.04em",
-              fontWeight: 800,
-              margin: "12px 0 0",
-            }}
-          >
-            최신 영상
-          </h2>
-          {videos.length > 0 ? (
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns:
-                  "repeat(auto-fit,minmax(min(100%,280px),1fr))",
-                gap: 16,
-                marginTop: "clamp(28px,4vw,44px)",
-              }}
-            >
-              {videos.map((v) => (
-                <div key={v.id} data-reveal style={{ display: "flex" }}>
-                  <VideoCard item={v} variant="home" />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p style={{ marginTop: 24, color: "var(--ink-soft)" }}>
-              곧 새로운 영상을 올릴 예정입니다.
-            </p>
-          )}
-          <div data-reveal style={{ marginTop: 22 }}>
-            <a
-              href={store.youtubeChannelUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ fontSize: 15, fontWeight: 700, color: "var(--blue)" }}
-            >
-              채널 전체 보기 ↗
-            </a>
           </div>
         </div>
       </section>
