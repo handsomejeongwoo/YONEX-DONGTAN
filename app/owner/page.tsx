@@ -4,18 +4,23 @@ import Footer from "@/components/Footer";
 import ClientEffects from "@/components/ClientEffects";
 import VideoCard from "@/components/VideoCard";
 import InstagramCard from "@/components/InstagramCard";
+// metadata 는 모듈 스코프라 정적 스냅샷을 사용한다(빌드 시점).
+import { store as staticStore, owner as staticOwner } from "@/lib/content";
 import {
-  store,
-  owner,
-  allRecords,
-  ownerMatchVideos,
-  ownerGearVideos,
-  featuredInstagram,
-} from "@/lib/content";
+  getStore,
+  getOwner,
+  getAllRecords,
+  getOwnerMatchVideos,
+  getOwnerGearVideos,
+  getFeaturedInstagram,
+} from "@/lib/content-server";
+
+// 관리자 수정이 재빌드 없이 반영되도록 요청 시점 렌더.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: `${owner.name} · ${store.name} 오너 · 배드민턴 플레이어`,
-  description: `${store.name} ${owner.name}. 코트에서 검증한 감각으로 장비를 함께 맞춥니다. 대회 기록과 경기 영상.`,
+  title: `${staticOwner.name} · ${staticStore.name} 오너 · 배드민턴 플레이어`,
+  description: `${staticStore.name} ${staticOwner.name}. 코트에서 검증한 감각으로 장비를 함께 맞춥니다. 대회 기록과 경기 영상.`,
 };
 
 const WRAP: React.CSSProperties = {
@@ -33,10 +38,10 @@ const EYEBROW: React.CSSProperties = {
 };
 
 // 소개 카드(선수 프로필 톤 — 사실 중심, 3개).
-const PROFILE = [
+const profileCards = (storeName: string) => [
   {
     n: "01",
-    title: `${store.name} 운영`,
+    title: `${storeName} 운영`,
     desc: "라켓부터 의류까지, 매장에서 직접 이야기 나눕니다.",
   },
   {
@@ -86,11 +91,16 @@ function resultStyle(result: string): {
   };
 }
 
-export default function OwnerPage() {
-  const records = allRecords();
-  const matches = ownerMatchVideos(4);
-  const gear = ownerGearVideos(2);
-  const instagram = featuredInstagram(6);
+export default async function OwnerPage() {
+  const [store, owner, records, matches, gear, instagram] = await Promise.all([
+    getStore(),
+    getOwner(),
+    getAllRecords(),
+    getOwnerMatchVideos(4),
+    getOwnerGearVideos(2),
+    getFeaturedInstagram(6),
+  ]);
+  const PROFILE = profileCards(store.name);
 
   return (
     <div id="top" style={{ width: "100%", overflowX: "hidden" }}>

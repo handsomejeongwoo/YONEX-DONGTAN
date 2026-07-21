@@ -31,7 +31,8 @@
     },
     "phone": "",
     "hours": "",
-    "notice": ""
+    "notice": "",
+    "closedDay": ""
   },
   "owner": {
     "name": "홍승인",
@@ -54,7 +55,8 @@
       "partner": "홍진수",
       "result": "우승",
       "source": "https://www.stnsports.co.kr/news/articleView.html?idxno=205421",
-      "highlight": true
+      "highlight": true,
+      "visible": true
     },
     {
       "id": "rec-2023-07-09-02",
@@ -169,7 +171,8 @@
       "tags": [
         "home-latest",
         "owner-gear"
-      ]
+      ],
+      "visible": true
     },
     {
       "id": "ngXm3RHb7OQ",

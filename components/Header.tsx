@@ -33,8 +33,9 @@ export default function Header({
   const p = variant === "home" ? "" : "/";
   const logoHref = variant === "home" ? "#top" : "/";
   const nav = [
-    { label: "매장 소개", href: `${p}#about` },
-    { label: "사장님 소개", href: "/owner", active: variant === "owner" },
+    { label: "홈", href: variant === "home" ? "#top" : "/", active: variant === "home" },
+    { label: "동탄점 소개", href: `${p}#about` },
+    { label: "사장님", href: "/owner", active: variant === "owner" },
     { label: "영상", href: `${p}#videos` },
     { label: "오시는 길", href: `${p}#visit` },
   ];

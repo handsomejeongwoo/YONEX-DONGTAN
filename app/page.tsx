@@ -5,12 +5,18 @@ import HomeHero from "@/components/HomeHero";
 import SmartStorePicks from "@/components/SmartStorePicks";
 import NaverMap from "@/components/NaverMap";
 import VideoCard from "@/components/VideoCard";
+import HomeBanners from "@/components/HomeBanners";
 import {
-  store,
-  homeVideos,
-  highlightRecords,
-  featuredProducts,
-} from "@/lib/content";
+  getStore,
+  getHomeVideos,
+  getHighlightRecords,
+  getFeaturedProducts,
+  getActiveBanners,
+  getActiveNotice,
+} from "@/lib/content-server";
+
+// 관리자에서 수정한 내용이 재빌드 없이 반영되도록 요청 시점 렌더.
+export const dynamic = "force-dynamic";
 
 const WRAP: React.CSSProperties = {
   maxWidth: 1200,
@@ -45,16 +51,33 @@ const CARE = [
   },
 ];
 
-export default function HomePage() {
-  const videos = homeVideos(3);
-  const highlights = highlightRecords().slice(0, 3);
+export default async function HomePage() {
+  const [store, videos, allHighlights, products, banners, notice] =
+    await Promise.all([
+      getStore(),
+      getHomeVideos(3),
+      getHighlightRecords(),
+      getFeaturedProducts(),
+      getActiveBanners(),
+      getActiveNotice(),
+    ]);
+  const highlights = allHighlights.slice(0, 3);
 
   return (
     <div id="top" style={{ width: "100%", overflowX: "clip" }}>
+      {notice && (
+        <div className="notice-bar">
+          <div className="notice-bar__inner">{notice}</div>
+        </div>
+      )}
+
       <Header variant="home" smartStoreUrl={store.smartStoreUrl} />
 
       {/* ===== HERO — 요넥스 동탄 브랜드 (파랑/초록 5:5 · motion) ===== */}
       <HomeHero />
+
+      {/* ===== 관리자 배너 (등록된 경우에만) ===== */}
+      <HomeBanners banners={banners} />
 
       {/* ===== 어떤 고민을 같이 봐드리나요 (white) ===== */}
       <section
@@ -268,7 +291,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== SMART STORE PICKS — white ===== */}
-      <SmartStorePicks products={featuredProducts()} />
+      <SmartStorePicks products={products} />
 
       {/* ===== 유튜브 최신 영상 3 — mist ===== */}
       <section
@@ -377,6 +400,44 @@ export default function HomePage() {
               >
                 {store.official} · {store.categories.join(" · ")}
               </p>
+
+              {/* 관리자에서 채운 항목만 노출 */}
+              {(store.phone || store.hours || store.closedDay) && (
+                <dl
+                  data-reveal
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "auto 1fr",
+                    gap: "8px 16px",
+                    margin: "20px 0 0",
+                    fontSize: 15,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {store.phone && (
+                    <>
+                      <dt style={{ color: "var(--ink-soft)", fontWeight: 600 }}>전화</dt>
+                      <dd style={{ margin: 0 }}>
+                        <a href={`tel:${store.phone.replace(/[^0-9+]/g, "")}`} style={{ color: "var(--blue)", fontWeight: 600 }}>
+                          {store.phone}
+                        </a>
+                      </dd>
+                    </>
+                  )}
+                  {store.hours && (
+                    <>
+                      <dt style={{ color: "var(--ink-soft)", fontWeight: 600 }}>영업시간</dt>
+                      <dd style={{ margin: 0 }}>{store.hours}</dd>
+                    </>
+                  )}
+                  {store.closedDay && (
+                    <>
+                      <dt style={{ color: "var(--ink-soft)", fontWeight: 600 }}>휴무</dt>
+                      <dd style={{ margin: 0 }}>{store.closedDay}</dd>
+                    </>
+                  )}
+                </dl>
+              )}
               <div
                 data-reveal
                 style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 28 }}

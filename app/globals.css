@@ -175,6 +175,45 @@ img {
   }
 }
 
+/* --- 홈 배너: 모바일 상하 / 데스크톱 좌우 --- */
+.home-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+.home-banner__media {
+  width: 100%;
+}
+@media (min-width: 860px) {
+  .home-banner {
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(28px, 4vw, 52px);
+  }
+  .home-banner[data-image-first="true"] {
+    flex-direction: row-reverse;
+  }
+  .home-banner__media {
+    width: auto;
+  }
+}
+
+/* --- 상단 공지 바 --- */
+.notice-bar {
+  background: var(--green, #1f9d55);
+  color: #fff;
+}
+.notice-bar__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+}
+
 /* --- 인스타 릴스 타일: 세로 컨테이너 + 호버 UI --- */
 .ig-tile {
   position: relative;
