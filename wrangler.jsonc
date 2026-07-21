@@ -19,5 +19,12 @@
       "database_id": "a94ff933-6d51-416a-a79b-f8f03ed6aa2f",
       "migrations_dir": "migrations"
     }
+  ],
+  // 이미지 저장소(R2). 업로드는 /api/admin/upload, 서빙은 /media/... 로 한다.
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "yonex-dongtan-media"
+    }
   ]
 }

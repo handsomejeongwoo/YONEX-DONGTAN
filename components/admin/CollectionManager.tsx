@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   getCollection,
   finalPrice,
@@ -275,6 +275,7 @@ export default function CollectionManager({
           onClose={closeForm}
           busy={busy}
           error={error}
+          folder={type}
           extra={
             type === "products" ? (
               <PricePreview
@@ -378,6 +379,7 @@ function FormModal({
   busy,
   error,
   extra,
+  folder,
 }: {
   title: string;
   fields: Field[];
@@ -388,6 +390,8 @@ function FormModal({
   busy: boolean;
   error: string | null;
   extra?: React.ReactNode;
+  /** 업로드 시 R2 안에서 분류할 폴더명 */
+  folder: string;
 }) {
   const set = (name: string, value: string | boolean) =>
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -429,7 +433,12 @@ function FormModal({
                   {f.required && <span style={{ color: "#c0392b" }}> *</span>}
                 </span>
               )}
-              <FieldInput field={f} value={form[f.name]} onChange={(v) => set(f.name, v)} />
+              <FieldInput
+                field={f}
+                value={form[f.name]}
+                onChange={(v) => set(f.name, v)}
+                folder={folder}
+              />
               {f.help && (
                 <span style={{ fontSize: 12, color: "#9aa7ad" }}>{f.help}</span>
               )}
@@ -452,15 +461,138 @@ function FormModal({
   );
 }
 
+/** 파일 업로드(R2) + 미리보기. 외부 이미지 주소 붙여넣기도 계속 지원한다. */
+function ImageField({
+  value,
+  onChange,
+  folder,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  folder: string;
+}) {
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  async function upload(file: File) {
+    setBusy(true);
+    setError(null);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("folder", folder);
+      const res = await fetch("/api/admin/upload/", { method: "POST", body: fd });
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        path?: string;
+        error?: string;
+      };
+      if (res.ok && data.ok && data.path) onChange(data.path);
+      else setError(data.error ?? "업로드에 실패했습니다.");
+    } catch {
+      setError("네트워크 오류가 발생했습니다.");
+    } finally {
+      setBusy(false);
+      if (inputRef.current) inputRef.current.value = "";
+    }
+  }
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+        <div
+          style={{
+            width: 72,
+            height: 72,
+            flexShrink: 0,
+            borderRadius: 6,
+            border: "1px solid #e0e6ea",
+            background: "#f4f6f8",
+            display: "grid",
+            placeItems: "center",
+            overflow: "hidden",
+            color: "#9aa7ad",
+            fontSize: 12,
+          }}
+        >
+          {value ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={value}
+              alt=""
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            "없음"
+          )}
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, flex: 1, minWidth: 0 }}>
+          <div style={{ display: "flex", gap: 6 }}>
+            <button
+              type="button"
+              onClick={() => inputRef.current?.click()}
+              disabled={busy}
+              style={{ ...btnGhost, height: 36 }}
+            >
+              {busy ? "올리는 중…" : value ? "이미지 변경" : "이미지 올리기"}
+            </button>
+            {value && (
+              <button
+                type="button"
+                onClick={() => onChange("")}
+                disabled={busy}
+                style={{ ...btnDanger, height: 36 }}
+              >
+                제거
+              </button>
+            )}
+          </div>
+          <input
+            ref={inputRef}
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) upload(f);
+            }}
+            style={{ display: "none" }}
+          />
+          <input
+            type="text"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder="또는 이미지 주소 붙여넣기"
+            style={{ ...inputBase, height: 36, lineHeight: "34px", fontSize: 13 }}
+          />
+        </div>
+      </div>
+      {error && <span style={{ fontSize: 12.5, color: "#c0392b" }}>{error}</span>}
+    </div>
+  );
+}
+
 function FieldInput({
   field,
   value,
   onChange,
+  folder,
 }: {
   field: Field;
   value: string | boolean | undefined;
   onChange: (v: string | boolean) => void;
+  folder: string;
 }) {
+  if (field.type === "image") {
+    return (
+      <ImageField
+        value={String(value ?? "")}
+        onChange={onChange}
+        folder={folder}
+      />
+    );
+  }
   if (field.type === "checkbox") {
     return (
       <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>

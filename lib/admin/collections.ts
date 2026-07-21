@@ -9,7 +9,9 @@ export type FieldType =
   | "number"
   | "select"
   | "tags"
-  | "checkbox";
+  | "checkbox"
+  /** 파일 업로드(R2) + 미리보기. 값은 /media/... 경로 또는 외부 URL. */
+  | "image";
 
 export interface Field {
   name: string;
@@ -133,7 +135,7 @@ export const COLLECTIONS: Record<CollectionType, CollectionDef> = {
     fields: [
       { name: "name", label: "상품명", type: "text", required: true, primary: true },
       { name: "category", label: "카테고리 라벨", type: "text", placeholder: "SPEED / POWER / CONTROL …" },
-      { name: "image", label: "이미지 URL", type: "url", placeholder: "https://…" },
+      { name: "image", label: "상품 이미지", type: "image" },
       { name: "price", label: "판매가 (원)", type: "number", placeholder: "289000", primary: true },
       { name: "discountPercent", label: "할인율 (%)", type: "number", placeholder: "22" },
       { name: "blurb", label: "설명", type: "textarea" },
@@ -167,6 +169,7 @@ export const COLLECTIONS: Record<CollectionType, CollectionDef> = {
     fields: [
       { name: "url", label: "인스타 URL", type: "url", required: true, primary: true, placeholder: "https://instagram.com/reel/… 또는 /p/…", help: "붙여넣으면 shortcode(id) 자동 추출" },
       { name: "caption", label: "문구", type: "text", required: true, primary: true },
+      // 릴스 썸네일은 sync 스크립트가 인스타에서 받아 저장한다(업로드 대상 아님).
       { name: "image", label: "썸네일 경로/URL", type: "text", placeholder: "/assets/instagram/CODE.jpg", help: "비우면 그라디언트 카드로 폴백" },
       { name: "type", label: "타입", type: "select", options: [ { value: "reel", label: "릴스" }, { value: "image", label: "이미지" } ] },
       { name: "tags", label: "태그", type: "tags" },
@@ -200,7 +203,7 @@ export const COLLECTIONS: Record<CollectionType, CollectionDef> = {
       { name: "title", label: "제목", type: "text", required: true, primary: true },
       { name: "category", label: "상단 라벨", type: "text", placeholder: "NEW ARRIVAL …" },
       { name: "description", label: "설명", type: "textarea" },
-      { name: "image", label: "이미지 URL", type: "url", placeholder: "https://…" },
+      { name: "image", label: "배너 이미지", type: "image" },
       { name: "theme", label: "테마", type: "select", options: [ { value: "blue", label: "블루" }, { value: "green", label: "그린" }, { value: "white", label: "화이트" } ] },
       { name: "imagePosition", label: "이미지 위치", type: "select", options: [ { value: "right", label: "오른쪽" }, { value: "left", label: "왼쪽" }, { value: "center", label: "가운데" } ] },
       { name: "buttonLabel", label: "버튼 문구", type: "text", placeholder: "자세히 보기" },
