@@ -3,6 +3,7 @@ import Link from "next/link";
 import { requireAdmin } from "@/lib/auth";
 import AdminLogoutButton from "@/components/admin/AdminLogoutButton";
 import AdminNav from "@/components/admin/AdminNav";
+import SessionKeeper from "@/components/admin/SessionKeeper";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,7 @@ export default async function PanelLayout({
 
   return (
     <div style={{ minHeight: "100svh", background: "#f4f6f8" }}>
+      <SessionKeeper />
       <header
         style={{
           position: "sticky",
