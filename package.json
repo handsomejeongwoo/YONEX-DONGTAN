@@ -6,12 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "preview": "npx serve@latest out",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "sync:youtube": "node scripts/sync-youtube.mjs",
     "sync:instagram": "node scripts/sync-instagram.mjs",
-    "import:instagram": "node scripts/import-instagram-dump.mjs"
+    "import:instagram": "node scripts/import-instagram-dump.mjs",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "db:migrate:local": "wrangler d1 migrations apply yonex-dongtan-content --local",
+    "db:migrate:remote": "wrangler d1 migrations apply yonex-dongtan-content --remote",
+    "db:seed:local": "node scripts/seed-d1.mjs --local",
+    "db:seed:remote": "node scripts/seed-d1.mjs --remote"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.20.1",
     "motion": "^12.42.2",
     "next": "^15.5.20",
     "react": "^19.2.0",
@@ -22,6 +29,7 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "fast-xml-parser": "4.4.1",
-    "typescript": "5.5.3"
+    "typescript": "5.5.3",
+    "wrangler": "^4.112.0"
   }
 }

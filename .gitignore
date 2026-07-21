@@ -29,3 +29,8 @@ next-env.d.ts
 # omc tooling state
 .omc/
 **/.omc/
+
+# cloudflare / opennext
+/.open-next/
+/.wrangler/
+/.tmp/
