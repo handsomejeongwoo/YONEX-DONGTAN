@@ -5,7 +5,8 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { Banner } from "@/lib/types";
 
 const EASE = [0.22, 0.61, 0.18, 1] as const;
-const INTERVAL = 6000;
+/** 자동 전환 간격(ms). 페이드가 0.5초라 4초 정도가 급해 보이지 않는다. */
+const INTERVAL = 4000;
 
 /**
  * 홈 배너 캐러셀.
@@ -16,7 +17,7 @@ const INTERVAL = 6000;
  */
 export default function HomeBanners({ banners }: { banners: Banner[] }) {
   const reduce = useReducedMotion() ?? false;
-  const [[index, dir], setState] = useState<[number, number]>([0, 0]);
+  const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const timer = useRef<number | null>(null);
 
@@ -24,13 +25,10 @@ export default function HomeBanners({ banners }: { banners: Banner[] }) {
   const count = items.length;
 
   const go = useCallback(
-    (d: number) => setState(([i]) => [(i + d + count) % count, d]),
+    (d: number) => setIndex((i) => (i + d + count) % count),
     [count],
   );
-  const jump = useCallback(
-    (to: number) => setState(([i]) => [to, to > i ? 1 : -1]),
-    [],
-  );
+  const jump = useCallback((to: number) => setIndex(to), []);
 
   useEffect(() => {
     if (count <= 1 || paused) return;
@@ -71,14 +69,14 @@ export default function HomeBanners({ banners }: { banners: Banner[] }) {
           style={{ width: "100%", height: "auto", display: "block", visibility: "hidden" }}
         />
 
-        <AnimatePresence initial={false} custom={dir} mode="popLayout">
+        {/* 두 장이 같은 자리에 겹친 채로 밝기만 교차한다(가로 이동 없이 깔끔하게). */}
+        <AnimatePresence initial={false}>
           <motion.div
             key={b.id}
-            custom={dir}
-            initial={reduce ? { opacity: 0 } : { opacity: 0, x: dir >= 0 ? "8%" : "-8%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, x: dir >= 0 ? "-8%" : "8%" }}
-            transition={{ duration: 0.55, ease: EASE }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduce ? 0 : 0.5, ease: EASE }}
             style={{ position: "absolute", inset: 0 }}
           >
             {b.href ? (

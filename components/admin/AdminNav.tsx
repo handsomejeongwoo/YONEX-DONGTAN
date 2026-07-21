@@ -10,6 +10,7 @@ const LINKS = [
   { href: "/admin/collections/achievements", label: "대회 이력" },
   { href: "/admin/collections/banners", label: "배너" },
   { href: "/admin/store", label: "매장 정보" },
+  { href: "/admin/docs", label: "사용 설명서" },
 ];
 
 export default function AdminNav() {

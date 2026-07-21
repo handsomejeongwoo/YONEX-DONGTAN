@@ -9,6 +9,7 @@ const CARDS = [
   { href: "/admin/collections/achievements", label: "대회 이력", key: "records", desc: "성적 기록 관리" },
   { href: "/admin/collections/banners", label: "배너", key: "banners", desc: "홈 상단 배너" },
   { href: "/admin/store", label: "매장 정보", key: null, desc: "주소·연락처·공지" },
+  { href: "/admin/docs", label: "사용 설명서", key: null, desc: "각 화면에 뭘 적는지 정리" },
 ] as const;
 
 export default async function AdminDashboard() {
