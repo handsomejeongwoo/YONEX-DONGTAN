@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { readContent } from "@/lib/repository/content-repository";
 
 export const dynamic = "force-dynamic";
@@ -33,9 +34,10 @@ export default async function AdminDashboard() {
         {CARDS.map((card) => {
           const n = count(card.key);
           return (
-            <a
+            <Link
               key={card.href}
               href={card.href}
+              prefetch
               style={{
                 background: "#fff",
                 border: "1px solid #e4e9ee",
@@ -52,7 +54,7 @@ export default async function AdminDashboard() {
                 )}
               </div>
               <div style={{ fontSize: 13, color: "#8ea3ab", marginTop: 6 }}>{card.desc}</div>
-            </a>
+            </Link>
           );
         })}
       </div>

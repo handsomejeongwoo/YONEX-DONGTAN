@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ClientEffects from "@/components/ClientEffects";
@@ -235,9 +236,9 @@ export default async function HomePage() {
                 </div>
               )}
               <div data-reveal style={{ marginTop: 20 }}>
-                <a href="/owner" className="btn btn-line btn-sm">
+                <Link href="/owner" prefetch className="btn btn-line btn-sm">
                   사장님 프로필 보기 →
-                </a>
+                </Link>
               </div>
             </div>
           </div>

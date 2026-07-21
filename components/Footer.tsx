@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { StoreInfo } from "@/lib/types";
 import FooterLogo from "@/components/FooterLogo";
 
@@ -46,17 +47,31 @@ export default function Footer({
           </p>
         </div>
         <div style={{ flex: "0 1 auto", display: "flex", flexWrap: "wrap", gap: 22 }}>
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="footlink"
-              {...(l.ext ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              style={{ fontSize: 15, color: "#e6eef0", fontWeight: 500 }}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) =>
+            // 외부 링크는 그대로, 사이트 안 이동만 Link 로 감싼다.
+            l.ext ? (
+              <a
+                key={l.label}
+                href={l.href}
+                className="footlink"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ fontSize: 15, color: "#e6eef0", fontWeight: 500 }}
+              >
+                {l.label}
+              </a>
+            ) : (
+              <Link
+                key={l.label}
+                href={l.href}
+                prefetch
+                className="footlink"
+                style={{ fontSize: 15, color: "#e6eef0", fontWeight: 500 }}
+              >
+                {l.label}
+              </Link>
+            ),
+          )}
         </div>
       </div>
       <div

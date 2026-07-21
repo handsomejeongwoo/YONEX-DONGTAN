@@ -1,6 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+
+/**
+ * 같은 페이지 안의 앵커(#videos)는 그대로 <a> 로 두고,
+ * 다른 페이지로 가는 주소만 Link 로 감싼다.
+ * Link 는 전체 새로고침 없이 이동하고, 미리 받아둬서 체감이 빨라진다.
+ */
+function NavLink({
+  href,
+  children,
+  ...rest
+}: {
+  href: string;
+  children: React.ReactNode;
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+  if (href.startsWith("#")) {
+    return (
+      <a href={href} {...rest}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} prefetch {...rest}>
+      {children}
+    </Link>
+  );
+}
 
 type Variant = "home" | "owner";
 
@@ -63,7 +91,7 @@ export default function Header({
           gap: 16,
         }}
       >
-        <a
+        <NavLink
           href={logoHref}
           aria-label="요넥스 동탄점 홈"
           style={{ display: "flex", alignItems: "center" }}
@@ -74,12 +102,12 @@ export default function Header({
             alt="YONEX DONGTAN"
             style={{ height: 38, width: "auto", display: "block" }}
           />
-        </a>
+        </NavLink>
 
         {!isMobile && (
           <nav style={{ display: "flex", alignItems: "center", gap: 26 }}>
             {nav.map((n) => (
-              <a
+              <NavLink
                 key={n.label}
                 href={n.href}
                 className="navlink"
@@ -91,7 +119,7 @@ export default function Header({
                 }}
               >
                 {n.label}
-              </a>
+              </NavLink>
             ))}
             <a
               href={smartStoreUrl}
@@ -150,7 +178,7 @@ export default function Header({
           }}
         >
           {nav.map((n) => (
-            <a
+            <NavLink
               key={n.label}
               href={n.href}
               onClick={() => setMenuOpen(false)}
@@ -165,7 +193,7 @@ export default function Header({
               }}
             >
               {n.label}
-            </a>
+            </NavLink>
           ))}
           <a
             href={smartStoreUrl}

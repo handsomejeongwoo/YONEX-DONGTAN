@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { requireAdmin } from "@/lib/auth";
 import AdminLogoutButton from "@/components/admin/AdminLogoutButton";
 import AdminNav from "@/components/admin/AdminNav";
@@ -33,9 +34,9 @@ export default async function PanelLayout({
           justifyContent: "space-between",
         }}
       >
-        <a href="/admin" style={{ fontSize: 15, fontWeight: 800, color: "#10222c" }}>
+        <Link href="/admin" prefetch style={{ fontSize: 15, fontWeight: 800, color: "#10222c" }}>
           요넥스 동탄점 · 관리자
-        </a>
+        </Link>
         <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
           <a
             href="/"

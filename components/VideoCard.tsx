@@ -61,6 +61,9 @@ export default function VideoCard({
           <img
             src={item.thumbnail}
             alt={item.title}
+            // 영상 카드는 스크롤 아래에 있어 화면에 들어올 때 받는다.
+            loading="lazy"
+            decoding="async"
             onError={() => setBroken(true)}
             style={{
               position: "absolute",

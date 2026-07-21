@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const LINKS = [
@@ -32,9 +33,10 @@ export default function AdminNav() {
           ? pathname === l.href || pathname === l.href + "/"
           : pathname.startsWith(l.href);
         return (
-          <a
+          <Link
             key={l.href}
             href={l.href}
+            prefetch
             style={{
               fontSize: 14,
               fontWeight: 600,
@@ -45,7 +47,7 @@ export default function AdminNav() {
             }}
           >
             {l.label}
-          </a>
+          </Link>
         );
       })}
     </nav>

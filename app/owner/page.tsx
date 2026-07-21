@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ClientEffects from "@/components/ClientEffects";
@@ -128,9 +129,10 @@ export default async function OwnerPage() {
       {/* ===== 선수 프로필 히어로 (라이트 · 사진 주도) ===== */}
       <section style={{ background: "var(--paper)" }}>
         <div style={{ ...WRAP, paddingTop: "clamp(32px,5vw,56px)", paddingBottom: "clamp(36px,5vw,60px)" }}>
-          <a
+          <Link
             data-reveal
             href="/"
+            prefetch
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -143,7 +145,7 @@ export default async function OwnerPage() {
             }}
           >
             ← YONEX DONGTAN
-          </a>
+          </Link>
           <div
             style={{
               display: "grid",
