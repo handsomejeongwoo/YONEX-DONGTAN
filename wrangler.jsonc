@@ -8,12 +8,12 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  // 콘텐츠 저장소(D1). database_id 는 `wrangler d1 create` 후 채워집니다.
+  // 콘텐츠 저장소(D1). database_id 는 계정 내 식별자이며 비밀값이 아닙니다.
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "yonex-dongtan-content",
-      "database_id": "PLACEHOLDER_RUN_WRANGLER_D1_CREATE",
+      "database_id": "a94ff933-6d51-416a-a79b-f8f03ed6aa2f",
       "migrations_dir": "migrations"
     }
   ]
