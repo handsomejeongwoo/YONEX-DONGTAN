@@ -114,20 +114,19 @@ export interface ContentMeta {
 
 // ===== 관리자(CMS) 콘텐츠 타입 =====
 
-export type BannerTheme = "blue" | "green" | "white";
-export type BannerImagePosition = "left" | "center" | "right";
-
-/** 홈 상단 자동 전환 배너. */
+/**
+ * 홈 자동 전환 배너.
+ *
+ * 문구·버튼이 이미 그려진 완성 이미지를 올리는 방식이라,
+ * 웹에서 따로 텍스트를 얹지 않는다(이미지 + 링크가 전부).
+ */
 export interface Banner {
   id: string;
   image: string;
-  theme: BannerTheme;
-  category: string;
+  /** 이미지를 못 볼 때의 대체 텍스트 겸 관리 목록 표시용 이름. */
   title: string;
-  description: string;
-  buttonLabel: string;
+  /** 클릭 시 이동할 주소. 비우면 클릭되지 않는다. */
   href: string;
-  imagePosition: BannerImagePosition;
   order: number;
   visible: boolean;
   /** 게시 기간(선택). null 이면 상시. */

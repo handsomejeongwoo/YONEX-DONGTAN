@@ -175,30 +175,6 @@ img {
   }
 }
 
-/* --- 홈 배너: 모바일 상하 / 데스크톱 좌우 --- */
-.home-banner {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: flex-start;
-}
-.home-banner__media {
-  width: 100%;
-}
-@media (min-width: 860px) {
-  .home-banner {
-    flex-direction: row;
-    align-items: center;
-    gap: clamp(28px, 4vw, 52px);
-  }
-  .home-banner[data-image-first="true"] {
-    flex-direction: row-reverse;
-  }
-  .home-banner__media {
-    width: auto;
-  }
-}
-
 /* --- 상단 공지 바 --- */
 .notice-bar {
   background: var(--green, #1f9d55);

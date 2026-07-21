@@ -200,14 +200,10 @@ export const COLLECTIONS: Record<CollectionType, CollectionDef> = {
     singular: "배너",
     titleField: "title",
     fields: [
-      { name: "title", label: "제목", type: "text", required: true, primary: true },
-      { name: "category", label: "상단 라벨", type: "text", placeholder: "NEW ARRIVAL …" },
-      { name: "description", label: "설명", type: "textarea" },
+      // 문구·버튼이 들어간 완성 이미지를 올리는 방식이라 텍스트 필드를 두지 않는다.
       { name: "image", label: "배너 이미지", type: "image" },
-      { name: "theme", label: "테마", type: "select", options: [ { value: "blue", label: "블루" }, { value: "green", label: "그린" }, { value: "white", label: "화이트" } ] },
-      { name: "imagePosition", label: "이미지 위치", type: "select", options: [ { value: "right", label: "오른쪽" }, { value: "left", label: "왼쪽" }, { value: "center", label: "가운데" } ] },
-      { name: "buttonLabel", label: "버튼 문구", type: "text", placeholder: "자세히 보기" },
-      { name: "href", label: "버튼 링크", type: "url", placeholder: "https://… 또는 /owner" },
+      { name: "href", label: "클릭 시 이동할 주소", type: "url", placeholder: "https://… 또는 /owner", help: "비우면 클릭되지 않습니다" },
+      { name: "title", label: "배너 이름", type: "text", required: true, primary: true, placeholder: "나노플레어 111 프로모션", help: "관리 목록 표시용 · 이미지가 안 보일 때 대체 텍스트로도 쓰입니다" },
       { name: "startAt", label: "게시 시작", type: "text", placeholder: "2026-07-01 (선택)" },
       { name: "endAt", label: "게시 종료", type: "text", placeholder: "2026-07-31 (선택)" },
       { name: "visible", label: "공개", type: "checkbox" },
@@ -356,26 +352,15 @@ export function normalize(
     }
     case "banners": {
       if (has("title")) out.title = str(raw.title);
-      if (has("category")) out.category = str(raw.category);
-      if (has("description")) out.description = str(raw.description);
       if (has("image")) out.image = str(raw.image);
-      if (has("theme")) {
-        const t = str(raw.theme);
-        out.theme = ["blue", "green", "white"].includes(t) ? t : "blue";
-      }
-      if (has("imagePosition")) {
-        const p = str(raw.imagePosition);
-        out.imagePosition = ["left", "center", "right"].includes(p) ? p : "right";
-      }
-      if (has("buttonLabel")) out.buttonLabel = str(raw.buttonLabel);
       if (has("href")) out.href = str(raw.href);
       if (has("startAt")) out.startAt = str(raw.startAt) || null;
       if (has("endAt")) out.endAt = str(raw.endAt) || null;
       if (has("visible")) out.visible = bool(raw.visible);
       if (mode === "create") {
         out.id = slugId(str(raw.title), "banner");
-        out.theme = out.theme ?? "blue";
-        out.imagePosition = out.imagePosition ?? "right";
+        out.image = out.image ?? "";
+        out.href = out.href ?? "";
         out.visible = has("visible") ? out.visible : true;
       }
       break;
