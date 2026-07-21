@@ -24,7 +24,14 @@
     "instagramUrl": "https://www.instagram.com/yonex_dongtan/",
     "youtubeChannelUrl": "https://www.youtube.com/channel/UCZ9iNela2zq6MKuvkh7iFpQ",
     "naverMapUrl": "https://pcmap.place.naver.com/place/1093842852/home?bk_query=%EC%9A%94%EB%84%A5%EC%8A%A4%20%EB%8F%99%ED%83%84%EC%A0%90&entry=bmp&fromPanelNum=2&timestamp=202607190121&locale=ko&svcName=map_pcv5&searchText=%EC%9A%94%EB%84%A5%EC%8A%A4%20%EB%8F%99%ED%83%84%EC%A0%90",
-    "naverMap": { "lat": 37.1856652, "lng": 127.1020731, "zoom": 18 }
+    "naverMap": {
+      "lat": 37.1856652,
+      "lng": 127.1020731,
+      "zoom": 18
+    },
+    "phone": "",
+    "hours": "",
+    "notice": ""
   },
   "owner": {
     "name": "홍승인",
@@ -39,6 +46,7 @@
   },
   "records": [
     {
+      "id": "rec-2023-04-30-01",
       "date": "2023-04-30",
       "year": "2023",
       "title": "2023 쏘텍스컵 STN 전국배드민턴대회",
@@ -49,6 +57,7 @@
       "highlight": true
     },
     {
+      "id": "rec-2023-07-09-02",
       "date": "2023-07-09",
       "year": "2023",
       "title": "2023 아쿠아듀오 샤워플러스 전국배드민턴대회",
@@ -59,6 +68,7 @@
       "highlight": true
     },
     {
+      "id": "rec-2024-07-05-03",
       "date": "2024-07-05",
       "year": "2024",
       "title": "제19회 원주 치악배 오픈",
@@ -69,6 +79,7 @@
       "highlight": true
     },
     {
+      "id": "rec-2025-04-26-04",
       "date": "2025-04-26",
       "year": "2025",
       "title": "창립24주년 2025 KBB 전국배드민턴대회",
@@ -79,6 +90,7 @@
       "highlight": true
     },
     {
+      "id": "rec-2025-06-07-05",
       "date": "2025-06-07",
       "year": "2025",
       "title": "제6회 코리아민턴사랑 유·청소년&청년 배드민턴대회",
@@ -89,6 +101,7 @@
       "highlight": false
     },
     {
+      "id": "rec-2025-10-26-06",
       "date": "2025-10-26",
       "year": "2025",
       "title": "2025 수원배 전국배드민턴대회",
@@ -99,6 +112,7 @@
       "highlight": true
     },
     {
+      "id": "rec-2022-08-07-07",
       "date": "2022-08-07",
       "year": "2022",
       "title": "제17회 원주 치악배 오픈",
@@ -109,6 +123,7 @@
       "highlight": false
     },
     {
+      "id": "rec-2025-04-06-08",
       "date": "2025-04-06",
       "year": "2025",
       "title": "거제 섬안의 섬여행 생활체육 전국배드민턴대회",
@@ -119,6 +134,7 @@
       "highlight": false
     },
     {
+      "id": "rec-2025-05-24-09",
       "date": "2025-05-24",
       "year": "2025",
       "title": "2025 메스타리배 코리아민턴사랑 전국배드민턴대회",
@@ -129,6 +145,7 @@
       "highlight": false
     },
     {
+      "id": "rec-2026-04-11-10",
       "date": "2026-04-11",
       "year": "2026",
       "title": "제2회 대전광역시 스트로커스 슈퍼매치",
@@ -521,6 +538,81 @@
       "url": "https://smartstore.naver.com/yonexdontan",
       "badge": "GEAR",
       "category": "액세서리",
+      "visible": true
+    }
+  ],
+  "banners": [],
+  "products": [
+    {
+      "id": "nf700game",
+      "name": "NANOFLARE 700 GAME1",
+      "image": "https://shop-phinf.pstatic.net/20260327_100/1774588906433LVSOI_PNG/1507570301917235_92086315.png?type=f750_750",
+      "category": "SPEED",
+      "originalPrice": "145,000원",
+      "price": "130,000원",
+      "blurb": "빠른 스윙과 셔틀 가속을 원하는 플레이를 위한 헤드라이트 라켓.",
+      "specs": [
+        "Head Light",
+        "Hi-Flex",
+        "4U · 20–28 lbs"
+      ],
+      "badge": "",
+      "url": "https://smartstore.naver.com/yonexdontan/products/13313327101",
+      "order": 1,
+      "visible": true
+    },
+    {
+      "id": "ax77pro",
+      "name": "ASTROX 77 PRO",
+      "image": "https://shop-phinf.pstatic.net/20240704_273/1720068652702vUCE2_PNG/18777642726019918_2049650221.png?type=f750_750",
+      "category": "POWER",
+      "originalPrice": "289,000원",
+      "price": "260,000원",
+      "blurb": "헤드헤비 밸런스와 부드러운 전환감을 바탕으로 파워 플레이를 지향하는 PRO 라켓.",
+      "specs": [
+        "Head Heavy",
+        "Medium Flex",
+        "4U · 20–28 lbs"
+      ],
+      "badge": "",
+      "url": "https://smartstore.naver.com/yonexdontan/products/10537658573",
+      "order": 2,
+      "visible": true
+    },
+    {
+      "id": "as11pro",
+      "name": "ARCSABER 11 PRO",
+      "image": "https://shop-phinf.pstatic.net/20240703_231/1720004550699jAAzO_PNG/697760969071236_1142989174.png?type=f750_750",
+      "category": "CONTROL",
+      "originalPrice": "309,000원",
+      "price": "278,000원",
+      "blurb": "셔틀 홀딩감과 정확한 컨트롤을 강조한 이븐밸런스 PRO 라켓.",
+      "specs": [
+        "Even Balance",
+        "Stiff",
+        "3U / 4U"
+      ],
+      "badge": "",
+      "url": "https://smartstore.naver.com/yonexdontan/products/10534643108",
+      "order": 3,
+      "visible": true
+    },
+    {
+      "id": "pc65z4vawide",
+      "name": "POWER CUSHION 65 Z4 VA WIDE",
+      "image": "https://shop-phinf.pstatic.net/20260228_266/17722512867556g64D_PNG/106384137872635431_1454034683.png?type=f750_750",
+      "category": "ALL-AROUND SHOES",
+      "originalPrice": "199,000원",
+      "price": "179,000원",
+      "blurb": "여유 있는 와이드 핏과 코트 위 안정감을 함께 고려한 배드민턴화.",
+      "specs": [
+        "Wide Fit",
+        "POWER CUSHION+",
+        "Indoor Court"
+      ],
+      "badge": "",
+      "url": "https://smartstore.naver.com/yonexdontan/products/13191616539",
+      "order": 4,
       "visible": true
     }
   ]

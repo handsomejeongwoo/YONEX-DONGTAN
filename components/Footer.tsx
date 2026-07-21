@@ -1,4 +1,5 @@
 import type { StoreInfo } from "@/lib/types";
+import FooterLogo from "@/components/FooterLogo";
 
 export default function Footer({
   store,
@@ -37,22 +38,7 @@ export default function Footer({
         }}
       >
         <div style={{ flex: "1 1 260px" }}>
-          <span
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              background: "#fff",
-              borderRadius: 2,
-              padding: "8px 12px",
-            }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/yonex-dongtan-logo.png"
-              alt="YONEX DONGTAN"
-              style={{ height: 26, width: "auto", display: "block" }}
-            />
-          </span>
+          <FooterLogo />
           <p style={{ fontSize: 14, lineHeight: 1.6, color: "#8ea3ab", margin: "16px 0 0" }}>
             {store.name} · {store.official}
             <br />

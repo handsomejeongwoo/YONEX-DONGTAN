@@ -10,6 +10,14 @@ export interface StoreInfo {
   youtubeChannelUrl: string;
   naverMapUrl: string;
   naverMap: { lat: number; lng: number; zoom: number };
+  /** 이하 관리자에서 편집(선택). */
+  phone?: string;
+  hours?: string;
+  closedDay?: string;
+  /** 홈 상단 공지(선택). */
+  notice?: string;
+  noticeStartAt?: string | null;
+  noticeEndAt?: string | null;
 }
 
 export interface OwnerInfo {
@@ -25,6 +33,8 @@ export interface OwnerInfo {
 }
 
 export interface RecordItem {
+  /** CRUD 식별자(관리자에서 부여). 예전 데이터엔 없을 수 있어 저장소에서 백필. */
+  id?: string;
   date: string;
   year: string;
   title: string;
@@ -33,6 +43,10 @@ export interface RecordItem {
   result: string;
   source: string;
   highlight?: boolean;
+  /** 공개 여부(관리자 토글). 없으면 공개로 간주. */
+  visible?: boolean;
+  /** 정렬 순서(관리자). */
+  order?: number;
 }
 
 export type YoutubeType = "video" | "short";
@@ -47,6 +61,10 @@ export interface YoutubeItem {
   category: string;
   badge: string;
   tags: string[];
+  /** 공개 여부(관리자 토글). 없으면 공개로 간주. */
+  visible?: boolean;
+  /** 정렬 순서(관리자). */
+  order?: number;
 }
 
 export type InstagramType = "image" | "reel";
@@ -61,6 +79,8 @@ export interface InstagramItem {
   featured?: boolean;
   order?: number;
   pinned?: boolean;
+  /** 공개 여부(관리자 토글). 없으면 공개로 간주. */
+  visible?: boolean;
   /** 로컬 캐시된 썸네일 경로(scripts/sync-instagram.mjs 로 생성). 없으면 그라디언트 카드로 폴백. */
   image?: string;
   /**
@@ -92,6 +112,50 @@ export interface ContentMeta {
   };
 }
 
+// ===== 관리자(CMS) 콘텐츠 타입 =====
+
+export type BannerTheme = "blue" | "green" | "white";
+export type BannerImagePosition = "left" | "center" | "right";
+
+/** 홈 상단 자동 전환 배너. */
+export interface Banner {
+  id: string;
+  image: string;
+  theme: BannerTheme;
+  category: string;
+  title: string;
+  description: string;
+  buttonLabel: string;
+  href: string;
+  imagePosition: BannerImagePosition;
+  order: number;
+  visible: boolean;
+  /** 게시 기간(선택). null 이면 상시. */
+  startAt?: string | null;
+  endAt?: string | null;
+}
+
+export type ProductBadge = "" | "NEW" | "PICK" | "SALE";
+
+/** 추천 상품(스마트스토어 링크 카드). */
+export interface FeaturedProduct {
+  id: string;
+  name: string;
+  image: string;
+  /** 카드 좌상단 카테고리 라벨(예: "SPEED", "POWER"). */
+  category: string;
+  /** 정가 / 판매가 — 문자열 그대로 저장(예: "289,000원"). 할인율은 파생 계산. */
+  originalPrice: string;
+  price: string;
+  blurb: string;
+  /** 스펙 태그(예: ["Head Light","4U · 20–28 lbs"]). */
+  specs: string[];
+  badge: ProductBadge;
+  url: string;
+  order: number;
+  visible: boolean;
+}
+
 export interface Content {
   meta: ContentMeta;
   store: StoreInfo;
@@ -100,4 +164,8 @@ export interface Content {
   youtube: YoutubeItem[];
   instagram: InstagramItem[];
   shopPicks: ShopPick[];
+  /** 관리자에서 관리하는 추천 상품(없으면 빈 배열). */
+  products: FeaturedProduct[];
+  /** 관리자에서 관리하는 홈 배너(없으면 빈 배열). */
+  banners: Banner[];
 }

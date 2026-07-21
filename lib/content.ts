@@ -8,6 +8,7 @@ import type {
   InstagramItem,
   ShopPick,
   RecordItem,
+  FeaturedProduct,
 } from "@/lib/types";
 
 export const content = raw as Content;
@@ -61,6 +62,13 @@ export function highlightRecords(): RecordItem[] {
 /** 노출 여부가 켜진 스마트스토어 추천 카드. */
 export function visibleShopPicks(): ShopPick[] {
   return content.shopPicks.filter((p) => p.visible);
+}
+
+/** 홈 추천 상품(공개 + order 순). */
+export function featuredProducts(): FeaturedProduct[] {
+  return [...(content.products ?? [])]
+    .filter((p) => p.visible !== false)
+    .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 }
 
 /** 대표 페이지 인스타그램 6칸(featured, order 순). */

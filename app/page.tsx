@@ -9,6 +9,7 @@ import {
   store,
   homeVideos,
   highlightRecords,
+  featuredProducts,
 } from "@/lib/content";
 
 const WRAP: React.CSSProperties = {
@@ -267,7 +268,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== SMART STORE PICKS — white ===== */}
-      <SmartStorePicks />
+      <SmartStorePicks products={featuredProducts()} />
 
       {/* ===== 유튜브 최신 영상 3 — mist ===== */}
       <section

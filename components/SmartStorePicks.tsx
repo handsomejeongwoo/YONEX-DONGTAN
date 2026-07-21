@@ -1,58 +1,35 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import type { FeaturedProduct } from "@/lib/types";
 
 const EASE = [0.22, 0.61, 0.18, 1] as const;
 const STORE_URL = "https://smartstore.naver.com/yonexdontan";
 
-// data/홈페이지-추천상품-4개.md 를 단일 기준으로 사용. 값 임의 변경 금지.
-const PICKS = [
-  {
-    category: "SPEED",
-    name: "NANOFLARE 700 GAME",
-    description: "빠른 스윙과 셔틀 가속을 원하는 플레이를 위한 헤드라이트 라켓.",
-    specs: ["Head Light", "Hi-Flex", "4U · 20–28 lbs"],
-    price: "130,000원",
-    originalPrice: "145,000원",
-    image:
-      "https://shop-phinf.pstatic.net/20260327_100/1774588906433LVSOI_PNG/1507570301917235_92086315.png?type=f750_750",
-    href: "https://smartstore.naver.com/yonexdontan/products/13313327101",
-  },
-  {
-    category: "POWER",
-    name: "ASTROX 77 PRO",
-    description:
-      "헤드헤비 밸런스와 부드러운 전환감을 바탕으로 파워 플레이를 지향하는 PRO 라켓.",
-    specs: ["Head Heavy", "Medium Flex", "4U · 20–28 lbs"],
-    price: "260,000원",
-    originalPrice: "289,000원",
-    image:
-      "https://shop-phinf.pstatic.net/20240704_273/1720068652702vUCE2_PNG/18777642726019918_2049650221.png?type=f750_750",
-    href: "https://smartstore.naver.com/yonexdontan/products/10537658573",
-  },
-  {
-    category: "CONTROL",
-    name: "ARCSABER 11 PRO",
-    description: "셔틀 홀딩감과 정확한 컨트롤을 강조한 이븐밸런스 PRO 라켓.",
-    specs: ["Even Balance", "Stiff", "3U / 4U"],
-    price: "278,000원",
-    originalPrice: "309,000원",
-    image:
-      "https://shop-phinf.pstatic.net/20240703_231/1720004550699jAAzO_PNG/697760969071236_1142989174.png?type=f750_750",
-    href: "https://smartstore.naver.com/yonexdontan/products/10534643108",
-  },
-  {
-    category: "ALL-AROUND SHOES",
-    name: "POWER CUSHION 65 Z4 VA WIDE",
-    description: "여유 있는 와이드 핏과 코트 위 안정감을 함께 고려한 배드민턴화.",
-    specs: ["Wide Fit", "POWER CUSHION+", "Indoor Court"],
-    price: "179,000원",
-    originalPrice: "199,000원",
-    image:
-      "https://shop-phinf.pstatic.net/20260228_266/17722512867556g64D_PNG/106384137872635431_1454034683.png?type=f750_750",
-    href: "https://smartstore.naver.com/yonexdontan/products/13191616539",
-  },
-];
+// 카드 표시용 형태(관리 데이터 FeaturedProduct 를 매핑).
+type Pick = {
+  category: string;
+  name: string;
+  description: string;
+  specs: string[];
+  price: string;
+  originalPrice: string;
+  image: string;
+  href: string;
+};
+
+function toPick(p: FeaturedProduct): Pick {
+  return {
+    category: p.category,
+    name: p.name,
+    description: p.blurb,
+    specs: p.specs ?? [],
+    price: p.price,
+    originalPrice: p.originalPrice,
+    image: p.image,
+    href: p.url,
+  };
+}
 
 const WRAP: React.CSSProperties = {
   maxWidth: 1200,
@@ -60,8 +37,14 @@ const WRAP: React.CSSProperties = {
   padding: "0 24px",
 };
 
-export default function SmartStorePicks() {
+export default function SmartStorePicks({
+  products,
+}: {
+  products: FeaturedProduct[];
+}) {
   const reduce = useReducedMotion() ?? false;
+  const PICKS = products.map(toPick);
+  if (PICKS.length === 0) return null;
 
   return (
     <section
