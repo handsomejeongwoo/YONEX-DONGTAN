@@ -11,11 +11,9 @@ function unauthorized() {
 }
 
 // GET /api/admin/collections/:type  → 목록
-export async function GET(
-  _req: Request,
-  { params }: { params: { type: string } },
-) {
-  if (!isAdmin()) return unauthorized();
+export async function GET(_req: Request, props: { params: Promise<{ type: string }> }) {
+  const params = await props.params;
+  if (!(await isAdmin())) return unauthorized();
   const def = getCollection(params.type);
   if (!def) return NextResponse.json({ ok: false, error: "알 수 없는 타입" }, { status: 404 });
   const items = await listCollection(def.key);
@@ -23,11 +21,9 @@ export async function GET(
 }
 
 // POST /api/admin/collections/:type  → 생성
-export async function POST(
-  req: Request,
-  { params }: { params: { type: string } },
-) {
-  if (!isAdmin()) return unauthorized();
+export async function POST(req: Request, props: { params: Promise<{ type: string }> }) {
+  const params = await props.params;
+  if (!(await isAdmin())) return unauthorized();
   const def = getCollection(params.type);
   if (!def) return NextResponse.json({ ok: false, error: "알 수 없는 타입" }, { status: 404 });
 

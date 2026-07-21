@@ -10,8 +10,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function PanelLayout({ children }: { children: React.ReactNode }) {
-  requireAdmin();
+export default async function PanelLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  await requireAdmin();
 
   return (
     <div style={{ minHeight: "100svh", background: "#f4f6f8" }}>

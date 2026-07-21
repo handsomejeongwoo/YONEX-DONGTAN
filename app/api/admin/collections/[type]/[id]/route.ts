@@ -11,11 +11,9 @@ function unauthorized() {
 }
 
 // PATCH /api/admin/collections/:type/:id  → 부분 수정
-export async function PATCH(
-  req: Request,
-  { params }: { params: { type: string; id: string } },
-) {
-  if (!isAdmin()) return unauthorized();
+export async function PATCH(req: Request, props: { params: Promise<{ type: string; id: string }> }) {
+  const params = await props.params;
+  if (!(await isAdmin())) return unauthorized();
   const def = getCollection(params.type);
   if (!def) return NextResponse.json({ ok: false, error: "알 수 없는 타입" }, { status: 404 });
 
@@ -35,11 +33,9 @@ export async function PATCH(
 }
 
 // DELETE /api/admin/collections/:type/:id
-export async function DELETE(
-  _req: Request,
-  { params }: { params: { type: string; id: string } },
-) {
-  if (!isAdmin()) return unauthorized();
+export async function DELETE(_req: Request, props: { params: Promise<{ type: string; id: string }> }) {
+  const params = await props.params;
+  if (!(await isAdmin())) return unauthorized();
   const def = getCollection(params.type);
   if (!def) return NextResponse.json({ ok: false, error: "알 수 없는 타입" }, { status: 404 });
 

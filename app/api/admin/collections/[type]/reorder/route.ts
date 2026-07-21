@@ -7,11 +7,9 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // POST /api/admin/collections/:type/reorder  { ids: string[] }
-export async function POST(
-  req: Request,
-  { params }: { params: { type: string } },
-) {
-  if (!isAdmin())
+export async function POST(req: Request, props: { params: Promise<{ type: string }> }) {
+  const params = await props.params;
+  if (!(await isAdmin()))
     return NextResponse.json({ ok: false, error: "인증이 필요합니다." }, { status: 401 });
   const def = getCollection(params.type);
   if (!def) return NextResponse.json({ ok: false, error: "알 수 없는 타입" }, { status: 404 });

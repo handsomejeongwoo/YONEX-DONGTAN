@@ -5,11 +5,12 @@ import CollectionManager from "@/components/admin/CollectionManager";
 
 export const dynamic = "force-dynamic";
 
-export default async function CollectionPage({
-  params,
-}: {
-  params: { type: string };
-}) {
+export default async function CollectionPage(
+  props: {
+    params: Promise<{ type: string }>;
+  }
+) {
+  const params = await props.params;
   const def = getCollection(params.type);
   if (!def) notFound();
 

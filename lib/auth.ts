@@ -51,11 +51,12 @@ export function verifySessionToken(token: string | undefined | null): boolean {
 }
 
 /** 현재 요청이 관리자 세션인지. */
-export function isAdmin(): boolean {
-  return verifySessionToken(cookies().get(SESSION_COOKIE)?.value);
+export async function isAdmin(): Promise<boolean> {
+  const store = await cookies();
+  return verifySessionToken(store.get(SESSION_COOKIE)?.value);
 }
 
 /** 관리자 전용 서버 컴포넌트 상단에서 호출. 비인증이면 로그인으로 리다이렉트. */
-export function requireAdmin(): void {
-  if (!isAdmin()) redirect("/admin/login");
+export async function requireAdmin(): Promise<void> {
+  if (!(await isAdmin())) redirect("/admin/login");
 }

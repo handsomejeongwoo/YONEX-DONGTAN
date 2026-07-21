@@ -32,7 +32,9 @@
     "phone": "",
     "hours": "",
     "notice": "",
-    "closedDay": ""
+    "closedDay": "",
+    "noticeStartAt": null,
+    "noticeEndAt": null
   },
   "owner": {
     "name": "홍승인",

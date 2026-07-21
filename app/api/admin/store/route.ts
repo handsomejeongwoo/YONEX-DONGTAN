@@ -26,14 +26,14 @@ function unauthorized() {
 
 // GET /api/admin/store
 export async function GET() {
-  if (!isAdmin()) return unauthorized();
+  if (!(await isAdmin())) return unauthorized();
   const c = await readContent();
   return NextResponse.json({ ok: true, store: c.store });
 }
 
 // PATCH /api/admin/store  → 매장 정보/공지 부분 수정
 export async function PATCH(req: Request) {
-  if (!isAdmin()) return unauthorized();
+  if (!(await isAdmin())) return unauthorized();
   const raw = (await req.json().catch(() => null)) as Record<string, unknown> | null;
   if (!raw || typeof raw !== "object")
     return NextResponse.json({ ok: false, error: "본문이 올바르지 않습니다." }, { status: 400 });
