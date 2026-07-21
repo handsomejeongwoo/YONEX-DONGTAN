@@ -32,25 +32,6 @@ const EYEBROW: React.CSSProperties = {
   textTransform: "uppercase",
 };
 
-// 요넥스 동탄점만의 장점(경기 경험 기반 선택 + 정확한 작업).
-const CARE = [
-  {
-    n: "01",
-    title: "플레이 스타일 기반 라켓 추천",
-    desc: "단식·복식, 전위·후위 선호, 스매시와 드라이브 비중, 현재 라켓의 무게·밸런스·샤프트 강도를 함께 확인합니다. 직접 사용해본 경험을 바탕으로 내 스윙에 맞는 요넥스 라켓을 추천합니다.",
-  },
-  {
-    n: "02",
-    title: "네매듭 공식 대리점",
-    desc: "2매듭·4매듭 등 다양한 스트링 방식 중에서 선택할 수 있습니다. 스트링의 반발력과 컨트롤 성향, 게이지, 원하는 텐션을 고려해 라켓 특성과 플레이 스타일에 맞는 조합으로 타구감이 살아나는 세팅을 제안합니다.",
-  },
-  {
-    n: "03",
-    title: "신발 · 웨어 피팅",
-    desc: "발볼과 착화감, 코트에서의 움직임을 기준으로 배드민턴화를 함께 고릅니다. 시즌별 요넥스 신상 웨어도 매장에서 직접 입어 보고, 사이즈와 핏을 확인한 뒤 선택할 수 있습니다.",
-  },
-];
-
 export default async function HomePage() {
   const [store, videos, allHighlights, products, banners, notice] =
     await Promise.all([
@@ -78,95 +59,6 @@ export default async function HomePage() {
 
       {/* ===== 관리자 배너 (등록된 경우에만) ===== */}
       <HomeBanners banners={banners} />
-
-      {/* ===== 어떤 고민을 같이 봐드리나요 (white) ===== */}
-      <section
-        id="about"
-        style={{ scrollMarginTop: 80, padding: "clamp(64px,9vw,104px) 0", background: "var(--paper)" }}
-      >
-        <div style={WRAP}>
-          <div data-reveal style={{ ...EYEBROW, color: "var(--blue)" }}>
-            About
-          </div>
-          <h2
-            data-reveal
-            style={{
-              fontSize: "clamp(28px,4.4vw,48px)",
-              lineHeight: 1.12,
-              letterSpacing: "-0.04em",
-              fontWeight: 800,
-              margin: "12px 0 0",
-            }}
-          >
-            경기 경험으로 고르고,
-            <br />
-            정확한 작업으로 완성합니다.
-          </h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,300px),1fr))",
-              gap: 14,
-              marginTop: "clamp(28px,4vw,44px)",
-            }}
-          >
-            {CARE.map((c) => (
-              <div
-                key={c.n}
-                data-reveal
-                className="card care-card"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  padding: "26px 24px 22px",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "'Barlow Condensed',sans-serif",
-                    fontWeight: 700,
-                    fontSize: 34,
-                    lineHeight: 1,
-                    color: "var(--blue)",
-                  }}
-                >
-                  {c.n}
-                </span>
-                <span
-                  style={{
-                    fontSize: 19,
-                    fontWeight: 700,
-                    marginTop: 16,
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  {c.title}
-                </span>
-                <span
-                  style={{
-                    fontSize: 15,
-                    lineHeight: 1.6,
-                    color: "var(--ink-soft)",
-                    marginTop: 8,
-                    flex: 1,
-                  }}
-                >
-                  {c.desc}
-                </span>
-                <span
-                  className="care-rule"
-                  style={{
-                    height: 3,
-                    background: "var(--blue)",
-                    marginTop: 18,
-                    display: "block",
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ===== 사장님 신뢰 근거 (짧게) — mist ===== */}
       <section style={{ padding: "clamp(56px,8vw,88px) 0", background: "var(--mist)" }}>
