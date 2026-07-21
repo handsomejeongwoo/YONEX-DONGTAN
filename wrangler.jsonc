@@ -1,6 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "yonex-dongtan",
+  // 공개 주소는 ‹name›.‹계정 서브도메인›.workers.dev 형식이다.
+  // 계정 서브도메인이 yonex-dongtan 이라 www 를 쓰면 www.yonex-dongtan.workers.dev 가 된다.
+  "name": "www",
   "main": ".open-next/worker.js",
   "compatibility_date": "2025-03-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
