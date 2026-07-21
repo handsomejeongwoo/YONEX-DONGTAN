@@ -6,7 +6,6 @@ const LINKS = [
   { href: "/admin", label: "대시보드", exact: true },
   { href: "/admin/collections/products", label: "추천 상품" },
   { href: "/admin/collections/youtube", label: "유튜브" },
-  { href: "/admin/collections/reels", label: "인스타 릴스" },
   { href: "/admin/collections/achievements", label: "대회 이력" },
   { href: "/admin/collections/banners", label: "배너" },
   { href: "/admin/store", label: "매장 정보" },

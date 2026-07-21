@@ -5,7 +5,6 @@ export const dynamic = "force-dynamic";
 const CARDS = [
   { href: "/admin/collections/products", label: "추천 상품", key: "products", desc: "스마트스토어 링크 카드" },
   { href: "/admin/collections/youtube", label: "유튜브 영상", key: "youtube", desc: "URL만 붙여넣으면 자동 등록" },
-  { href: "/admin/collections/reels", label: "인스타 릴스", key: "instagram", desc: "릴스/이미지 노출 관리" },
   { href: "/admin/collections/achievements", label: "대회 이력", key: "records", desc: "성적 기록 관리" },
   { href: "/admin/collections/banners", label: "배너", key: "banners", desc: "홈 상단 배너" },
   { href: "/admin/store", label: "매장 정보", key: null, desc: "주소·연락처·공지" },

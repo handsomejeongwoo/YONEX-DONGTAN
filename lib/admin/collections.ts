@@ -46,7 +46,6 @@ export const PRODUCT_LIMIT = 6;
 export type CollectionType =
   | "products"
   | "youtube"
-  | "reels"
   | "achievements"
   | "banners";
 
@@ -179,23 +178,6 @@ export const COLLECTIONS: Record<CollectionType, CollectionDef> = {
         type: "checkbox" as const,
         fromTag: p.tag,
       })),
-      { name: "visible", label: "공개", type: "checkbox" },
-    ],
-  },
-  reels: {
-    key: "instagram",
-    label: "인스타 릴스",
-    singular: "릴스",
-    titleField: "caption",
-    fields: [
-      { name: "url", label: "인스타 URL", type: "url", required: true, primary: true, placeholder: "https://instagram.com/reel/… 또는 /p/…", help: "붙여넣으면 shortcode(id) 자동 추출" },
-      { name: "caption", label: "문구", type: "text", required: true, primary: true },
-      // 릴스 썸네일은 sync 스크립트가 인스타에서 받아 저장한다(업로드 대상 아님).
-      { name: "image", label: "썸네일 경로/URL", type: "text", placeholder: "/assets/instagram/CODE.jpg", help: "비우면 그라디언트 카드로 폴백" },
-      { name: "type", label: "타입", type: "select", options: [ { value: "reel", label: "릴스" }, { value: "image", label: "이미지" } ] },
-      { name: "tags", label: "태그", type: "tags" },
-      { name: "featured", label: "홈 노출", type: "checkbox" },
-      { name: "pinned", label: "상단 고정", type: "checkbox" },
       { name: "visible", label: "공개", type: "checkbox" },
     ],
   },
@@ -334,30 +316,6 @@ export function normalize(
         // 배지·게시일은 입력받지 않고 자동으로 채운다.
         out.badge = out.type === "short" ? "SHORTS" : str(raw.badge);
         out.publishedAt = str(raw.publishedAt) || new Date().toISOString().slice(0, 10);
-      }
-      break;
-    }
-    case "reels": {
-      if (has("url")) {
-        const url = str(raw.url);
-        const code = parseInstagramCode(url);
-        if (mode === "create" && !code)
-          return { ok: false, error: "유효한 인스타그램 URL이 아닙니다." };
-        out.url = url;
-        if (code) out.id = code;
-      }
-      if (has("caption")) out.caption = str(raw.caption);
-      if (has("image")) out.image = str(raw.image);
-      if (has("type")) out.type = str(raw.type) === "image" ? "image" : "reel";
-      if (has("tags")) out.tags = tags(raw.tags);
-      if (has("featured")) out.featured = bool(raw.featured);
-      if (has("pinned")) out.pinned = bool(raw.pinned);
-      if (has("visible")) out.visible = bool(raw.visible);
-      if (mode === "create") {
-        out.type = out.type ?? "reel";
-        out.tags = out.tags ?? [];
-        out.postedAt = str(raw.postedAt) || "";
-        out.visible = has("visible") ? out.visible : true;
       }
       break;
     }
