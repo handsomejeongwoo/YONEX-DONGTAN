@@ -89,21 +89,30 @@ export function slugId(base: string, prefix = "item"): string {
   return `${slug || prefix}-${suffix}`;
 }
 
-/** "289,000원" / "289000" → 289000. 파싱 불가 시 null. */
-export function toWon(v: string): number | null {
-  const n = Number(String(v).replace(/[^0-9]/g, ""));
-  return Number.isFinite(n) && n > 0 ? n : null;
+/** "289,000원" / "289000" → 289000. 파싱 불가 시 0. */
+export function toWon(v: unknown): number {
+  const n = Number(String(v ?? "").replace(/[^0-9]/g, ""));
+  return Number.isFinite(n) && n > 0 ? n : 0;
 }
 
-/** 정가/판매가로 할인율(%) 계산. 불가하면 null. */
-export function computeDiscount(
-  original: string,
-  price: string,
-): number | null {
-  const o = toWon(original);
+/** 할인율을 0~99 정수로 보정. */
+export function toPercent(v: unknown): number {
+  const n = Math.round(Number(String(v ?? "").replace(/[^0-9.]/g, "")));
+  if (!Number.isFinite(n) || n <= 0) return 0;
+  return Math.min(n, 99);
+}
+
+/** 정가 + 할인율 → 최종 판매가(원 단위 반올림). */
+export function finalPrice(price: number, discountPercent: number): number {
   const p = toWon(price);
-  if (o === null || p === null || o <= p) return null;
-  return Math.round(((o - p) / o) * 100);
+  const d = toPercent(discountPercent);
+  if (!p) return 0;
+  return d > 0 ? Math.round(p * (1 - d / 100)) : p;
+}
+
+/** 130500 → "130,500원" */
+export function formatWon(n: number): string {
+  return `${toWon(n).toLocaleString("ko-KR")}원`;
 }
 
 // ---- 컬렉션 정의 ----
@@ -125,8 +134,8 @@ export const COLLECTIONS: Record<CollectionType, CollectionDef> = {
       { name: "name", label: "상품명", type: "text", required: true, primary: true },
       { name: "category", label: "카테고리 라벨", type: "text", placeholder: "SPEED / POWER / CONTROL …" },
       { name: "image", label: "이미지 URL", type: "url", placeholder: "https://…", help: "스마트스토어 상품 이미지 주소" },
-      { name: "originalPrice", label: "정가", type: "text", placeholder: "289,000원" },
-      { name: "price", label: "판매가", type: "text", placeholder: "260,000원", primary: true },
+      { name: "price", label: "판매가", type: "number", placeholder: "289000", primary: true, help: "숫자만 입력하세요. '원'과 쉼표는 자동으로 붙습니다." },
+      { name: "discountPercent", label: "할인율 (%)", type: "number", placeholder: "22", help: "22 를 넣으면 22% 할인된 가격이 카드에 표시됩니다. 할인 없으면 비우세요." },
       { name: "blurb", label: "설명", type: "textarea" },
       { name: "specs", label: "스펙 태그", type: "tags", help: "쉼표로 구분 (예: Head Light, 4U · 20–28 lbs)" },
       { name: "badge", label: "배지", type: "select", options: BADGE_OPTIONS },
@@ -254,8 +263,9 @@ export function normalize(
       if (has("name")) out.name = str(raw.name);
       if (has("category")) out.category = str(raw.category);
       if (has("image")) out.image = str(raw.image);
-      if (has("originalPrice")) out.originalPrice = str(raw.originalPrice);
-      if (has("price")) out.price = str(raw.price);
+      // 가격은 숫자만 저장한다("원"/쉼표는 렌더링 시 부착).
+      if (has("price")) out.price = toWon(raw.price);
+      if (has("discountPercent")) out.discountPercent = toPercent(raw.discountPercent);
       if (has("blurb")) out.blurb = str(raw.blurb);
       if (has("specs")) out.specs = tags(raw.specs);
       if (has("badge")) out.badge = str(raw.badge);
@@ -265,6 +275,8 @@ export function normalize(
         out.id = slugId(str(raw.name), "prod");
         out.badge = out.badge ?? "";
         out.specs = out.specs ?? [];
+        out.price = out.price ?? 0;
+        out.discountPercent = out.discountPercent ?? 0;
         out.visible = has("visible") ? out.visible : true;
       }
       break;

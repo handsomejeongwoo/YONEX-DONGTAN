@@ -3,7 +3,10 @@
 import { useMemo, useState } from "react";
 import {
   getCollection,
-  computeDiscount,
+  finalPrice,
+  formatWon,
+  toPercent,
+  toWon,
   type CollectionType,
   type Field,
 } from "@/lib/admin/collections";
@@ -224,12 +227,22 @@ export default function CollectionManager({
                     .map((f) => {
                       const val = item[f.name];
                       if (val == null || val === "") return null;
+                      // 상품 가격은 저장값(숫자)이 아니라 카드에 찍히는 최종가로 보여준다.
+                      if (type === "products" && f.name === "price") {
+                        const list = toWon(val);
+                        const d = toPercent(item.discountPercent);
+                        if (!list) return null;
+                        return (
+                          <span key={f.name}>
+                            {formatWon(finalPrice(list, d))}
+                            {d > 0 && (
+                              <b style={{ color: "#c0392b", marginLeft: 6 }}>{d}%</b>
+                            )}
+                          </span>
+                        );
+                      }
                       return <span key={f.name}>{f.label}: {String(val)}</span>;
                     })}
-                  {type === "products" && (() => {
-                    const d = computeDiscount(String(item.originalPrice ?? ""), String(item.price ?? ""));
-                    return d ? <span style={{ color: "#c0392b", fontWeight: 700 }}>-{d}%</span> : null;
-                  })()}
                 </div>
               </div>
 
@@ -264,7 +277,10 @@ export default function CollectionManager({
           error={error}
           extra={
             type === "products" ? (
-              <DiscountHint original={form.originalPrice as string} price={form.price as string} />
+              <PricePreview
+                price={form.price as string}
+                discount={form.discountPercent as string}
+              />
             ) : null
           }
         />
@@ -316,13 +332,39 @@ function ThumbOrIndex({ item, index }: { item: Item; index: number }) {
   );
 }
 
-function DiscountHint({ original, price }: { original?: string; price?: string }) {
-  const d = computeDiscount(original ?? "", price ?? "");
-  if (!d) return null;
+/** 저장 전에 카드에 실제로 찍힐 가격을 그대로 보여준다. */
+function PricePreview({ price, discount }: { price?: string; discount?: string }) {
+  const list = toWon(price);
+  const d = toPercent(discount);
+  if (!list) return null;
+  const final = finalPrice(list, d);
   return (
-    <p style={{ fontSize: 13, color: "#c0392b", fontWeight: 700, margin: "0 0 4px" }}>
-      할인율 {d}% (자동 계산)
-    </p>
+    <div
+      style={{
+        background: "#f4f6f8",
+        border: "1px solid #e4e9ee",
+        borderRadius: 6,
+        padding: "10px 12px",
+        margin: "0 0 16px",
+      }}
+    >
+      <div style={{ fontSize: 12, color: "#8ea3ab", marginBottom: 4 }}>
+        카드에 표시될 가격
+      </div>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
+        {d > 0 && (
+          <>
+            <span style={{ fontSize: 13, color: "#9aa7ad", textDecoration: "line-through" }}>
+              {formatWon(list)}
+            </span>
+            <span style={{ fontSize: 13, fontWeight: 800, color: "#c0392b" }}>{d}%</span>
+          </>
+        )}
+        <span style={{ fontSize: 19, fontWeight: 800, color: "#10222c" }}>
+          {formatWon(final)}
+        </span>
+      </div>
+    </div>
   );
 }
 
@@ -439,7 +481,7 @@ function FieldInput({
         onChange={(e) => onChange(e.target.value)}
         placeholder={field.placeholder}
         rows={3}
-        style={{ ...inputBase, resize: "vertical", fontFamily: "inherit" }}
+        style={textareaBase}
       />
     );
   }
@@ -470,14 +512,28 @@ function FieldInput({
 // ---- 스타일 ----
 const inputBase: React.CSSProperties = {
   height: 42,
+  // 세로 패딩 대신 line-height 로 중앙 정렬(고정 높이 입력용)
   padding: "0 12px",
   fontSize: 15,
+  lineHeight: "40px",
   border: "1px solid #d7dee2",
   borderRadius: 6,
   outlineColor: "#0b50a1",
   width: "100%",
   boxSizing: "border-box",
   background: "#fff",
+  color: "#10222c",
+};
+
+// textarea 는 여러 줄이라 고정 높이/line-height 를 쓰면 글자가 위로 붙는다.
+const textareaBase: React.CSSProperties = {
+  ...inputBase,
+  height: "auto",
+  minHeight: 84,
+  lineHeight: 1.5,
+  padding: "10px 12px",
+  resize: "vertical",
+  fontFamily: "inherit",
 };
 const btnPrimary: React.CSSProperties = {
   height: 40,

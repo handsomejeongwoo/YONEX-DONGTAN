@@ -94,7 +94,7 @@ export default function StoreEditor({ initial }: { initial: StoreInfo }) {
                       value={form[field.name] ?? ""}
                       onChange={(e) => setForm((p) => ({ ...p, [field.name]: e.target.value }))}
                       rows={2}
-                      style={{ ...inputBase, resize: "vertical", fontFamily: "inherit" }}
+                      style={textareaBase}
                     />
                   ) : (
                     <input
@@ -133,10 +133,23 @@ const inputBase: React.CSSProperties = {
   height: 42,
   padding: "0 12px",
   fontSize: 15,
+  lineHeight: "40px",
   border: "1px solid #d7dee2",
   borderRadius: 6,
   outlineColor: "#0b50a1",
   width: "100%",
   boxSizing: "border-box",
   background: "#fff",
+  color: "#10222c",
+};
+
+// textarea 는 여러 줄이라 고정 높이/line-height 를 쓰면 글자가 위로 붙는다.
+const textareaBase: React.CSSProperties = {
+  ...inputBase,
+  height: "auto",
+  minHeight: 76,
+  lineHeight: 1.5,
+  padding: "10px 12px",
+  resize: "vertical",
+  fontFamily: "inherit",
 };

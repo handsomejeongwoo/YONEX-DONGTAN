@@ -1,7 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   // 공개 주소는 ‹name›.‹계정 서브도메인›.workers.dev 형식이다.
-  // 계정 서브도메인이 yonex-dongtan 이라 www 를 쓰면 www.yonex-dongtan.workers.dev 가 된다.
+  // 계정 서브도메인을 yonex-dongtan 으로 설정하면 → www.yonex-dongtan.workers.dev
+  // (계정 서브도메인 변경은 대시보드에서만 가능. API 는 거부한다)
   "name": "www",
   "main": ".open-next/worker.js",
   "compatibility_date": "2025-03-01",

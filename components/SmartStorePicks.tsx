@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import type { FeaturedProduct } from "@/lib/types";
+import { finalPrice, formatWon, toPercent, toWon } from "@/lib/admin/collections";
 
 const EASE = [0.22, 0.61, 0.18, 1] as const;
 const STORE_URL = "https://smartstore.naver.com/yonexdontan";
@@ -12,20 +13,27 @@ type Pick = {
   name: string;
   description: string;
   specs: string[];
+  /** 화면에 크게 보여줄 최종가 */
   price: string;
-  originalPrice: string;
+  /** 할인 있을 때만 채워지는 취소선 정가 */
+  originalPrice: string | null;
+  discountPercent: number;
   image: string;
   href: string;
 };
 
 function toPick(p: FeaturedProduct): Pick {
+  const listPrice = toWon(p.price);
+  const discount = toPercent(p.discountPercent);
+  const final = finalPrice(listPrice, discount);
   return {
     category: p.category,
     name: p.name,
     description: p.blurb,
     specs: p.specs ?? [],
-    price: p.price,
-    originalPrice: p.originalPrice,
+    price: final ? formatWon(final) : "",
+    originalPrice: discount > 0 && listPrice ? formatWon(listPrice) : null,
+    discountPercent: discount,
     image: p.image,
     href: p.url,
   };
@@ -206,27 +214,42 @@ export default function SmartStorePicks({
                 <div
                   style={{
                     display: "flex",
+                    flexWrap: "wrap",
                     alignItems: "baseline",
                     gap: 8,
                     marginTop: "auto",
                     paddingTop: 8,
                   }}
                 >
-                  <span
-                    style={{
-                      fontSize: 13,
-                      color: "#9aa7ad",
-                      textDecoration: "line-through",
-                    }}
-                  >
-                    {p.originalPrice}
-                  </span>
+                  {p.originalPrice && (
+                    <span
+                      style={{
+                        fontSize: 13,
+                        color: "#9aa7ad",
+                        textDecoration: "line-through",
+                      }}
+                    >
+                      {p.originalPrice}
+                    </span>
+                  )}
+                  {p.discountPercent > 0 && (
+                    <span
+                      style={{
+                        fontSize: 13,
+                        fontWeight: 800,
+                        color: "#c0392b",
+                      }}
+                    >
+                      {p.discountPercent}%
+                    </span>
+                  )}
                   <span
                     style={{
                       fontSize: 21,
                       fontWeight: 800,
                       letterSpacing: "-0.02em",
                       color: "var(--ink)",
+                      width: "100%",
                     }}
                   >
                     {p.price}

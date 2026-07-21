@@ -553,8 +553,6 @@
       "name": "NANOFLARE 700 GAME1",
       "image": "https://shop-phinf.pstatic.net/20260327_100/1774588906433LVSOI_PNG/1507570301917235_92086315.png?type=f750_750",
       "category": "SPEED",
-      "originalPrice": "145,000원",
-      "price": "130,000원",
       "blurb": "빠른 스윙과 셔틀 가속을 원하는 플레이를 위한 헤드라이트 라켓.",
       "specs": [
         "Head Light",
@@ -564,15 +562,15 @@
       "badge": "",
       "url": "https://smartstore.naver.com/yonexdontan/products/13313327101",
       "order": 1,
-      "visible": true
+      "visible": true,
+      "price": 145000,
+      "discountPercent": 10
     },
     {
       "id": "ax77pro",
       "name": "ASTROX 77 PRO",
       "image": "https://shop-phinf.pstatic.net/20240704_273/1720068652702vUCE2_PNG/18777642726019918_2049650221.png?type=f750_750",
       "category": "POWER",
-      "originalPrice": "289,000원",
-      "price": "260,000원",
       "blurb": "헤드헤비 밸런스와 부드러운 전환감을 바탕으로 파워 플레이를 지향하는 PRO 라켓.",
       "specs": [
         "Head Heavy",
@@ -582,15 +580,15 @@
       "badge": "",
       "url": "https://smartstore.naver.com/yonexdontan/products/10537658573",
       "order": 2,
-      "visible": true
+      "visible": true,
+      "price": 289000,
+      "discountPercent": 10
     },
     {
       "id": "as11pro",
       "name": "ARCSABER 11 PRO",
       "image": "https://shop-phinf.pstatic.net/20240703_231/1720004550699jAAzO_PNG/697760969071236_1142989174.png?type=f750_750",
       "category": "CONTROL",
-      "originalPrice": "309,000원",
-      "price": "278,000원",
       "blurb": "셔틀 홀딩감과 정확한 컨트롤을 강조한 이븐밸런스 PRO 라켓.",
       "specs": [
         "Even Balance",
@@ -600,15 +598,15 @@
       "badge": "",
       "url": "https://smartstore.naver.com/yonexdontan/products/10534643108",
       "order": 3,
-      "visible": true
+      "visible": true,
+      "price": 309000,
+      "discountPercent": 10
     },
     {
       "id": "pc65z4vawide",
       "name": "POWER CUSHION 65 Z4 VA WIDE",
       "image": "https://shop-phinf.pstatic.net/20260228_266/17722512867556g64D_PNG/106384137872635431_1454034683.png?type=f750_750",
       "category": "ALL-AROUND SHOES",
-      "originalPrice": "199,000원",
-      "price": "179,000원",
       "blurb": "여유 있는 와이드 핏과 코트 위 안정감을 함께 고려한 배드민턴화.",
       "specs": [
         "Wide Fit",
@@ -618,7 +616,9 @@
       "badge": "",
       "url": "https://smartstore.naver.com/yonexdontan/products/13191616539",
       "order": 4,
-      "visible": true
+      "visible": true,
+      "price": 199000,
+      "discountPercent": 10
     }
   ]
 }

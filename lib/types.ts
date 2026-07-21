@@ -144,9 +144,13 @@ export interface FeaturedProduct {
   image: string;
   /** 카드 좌상단 카테고리 라벨(예: "SPEED", "POWER"). */
   category: string;
-  /** 정가 / 판매가 — 문자열 그대로 저장(예: "289,000원"). 할인율은 파생 계산. */
-  originalPrice: string;
-  price: string;
+  /**
+   * 판매가(정가) — 숫자만 저장한다(예: 289000).
+   * "원"과 천단위 쉼표는 화면에 그릴 때 붙인다.
+   */
+  price: number;
+  /** 할인율(%). 0 이면 할인 표시 없음. 최종가 = price * (1 - discountPercent/100) */
+  discountPercent: number;
   blurb: string;
   /** 스펙 태그(예: ["Head Light","4U · 20–28 lbs"]). */
   specs: string[];
