@@ -31,5 +31,8 @@
     "fast-xml-parser": "4.4.1",
     "typescript": "5.5.3",
     "wrangler": "^4.112.0"
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

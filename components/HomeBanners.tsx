@@ -5,8 +5,19 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { Banner } from "@/lib/types";
 
 const EASE = [0.22, 0.61, 0.18, 1] as const;
-/** 자동 전환 간격(ms). 페이드가 0.5초라 4초 정도가 급해 보이지 않는다. */
+/** 자동 전환 간격(ms). 전환이 0.6초라 4초 정도가 급해 보이지 않는다. */
 const INTERVAL = 4000;
+
+/**
+ * 가로 슬라이드. dir 이 1이면 다음(오른쪽에서 들어와 왼쪽으로 나감),
+ * -1이면 이전 방향으로 움직인다. still 은 모션 최소화 설정을 켠 사용자용.
+ */
+const SLIDE = {
+  enter: (d: number) => ({ x: d >= 0 ? "100%" : "-100%", opacity: 1 }),
+  center: { x: "0%", opacity: 1 },
+  exit: (d: number) => ({ x: d >= 0 ? "-100%" : "100%", opacity: 1 }),
+  still: { x: "0%", opacity: 0 },
+};
 
 /**
  * 홈 배너 캐러셀.
@@ -17,7 +28,8 @@ const INTERVAL = 4000;
  */
 export default function HomeBanners({ banners }: { banners: Banner[] }) {
   const reduce = useReducedMotion() ?? false;
-  const [index, setIndex] = useState(0);
+  // 방향(dir)을 같이 들고 다녀야 다음/이전에 맞춰 슬라이드 방향이 정해진다.
+  const [[index, dir], setState] = useState<[number, number]>([0, 1]);
   const [paused, setPaused] = useState(false);
   const timer = useRef<number | null>(null);
 
@@ -25,10 +37,13 @@ export default function HomeBanners({ banners }: { banners: Banner[] }) {
   const count = items.length;
 
   const go = useCallback(
-    (d: number) => setIndex((i) => (i + d + count) % count),
+    (d: number) => setState(([i]) => [(i + d + count) % count, d]),
     [count],
   );
-  const jump = useCallback((to: number) => setIndex(to), []);
+  const jump = useCallback(
+    (to: number) => setState(([i]) => [to, to >= i ? 1 : -1]),
+    [],
+  );
 
   useEffect(() => {
     if (count <= 1 || paused) return;
@@ -69,14 +84,16 @@ export default function HomeBanners({ banners }: { banners: Banner[] }) {
           style={{ width: "100%", height: "auto", display: "block", visibility: "hidden" }}
         />
 
-        {/* 두 장이 같은 자리에 겹친 채로 밝기만 교차한다(가로 이동 없이 깔끔하게). */}
-        <AnimatePresence initial={false}>
+        {/* 나가는 장과 들어오는 장이 같이 옆으로 밀린다(자동 전환도 동일). */}
+        <AnimatePresence initial={false} custom={dir}>
           <motion.div
             key={b.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.5, ease: EASE }}
+            custom={dir}
+            variants={SLIDE}
+            initial={reduce ? "still" : "enter"}
+            animate="center"
+            exit={reduce ? "still" : "exit"}
+            transition={{ duration: reduce ? 0 : 0.6, ease: EASE }}
             style={{ position: "absolute", inset: 0 }}
           >
             {b.href ? (

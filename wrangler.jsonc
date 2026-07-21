@@ -5,7 +5,7 @@
   // (계정 서브도메인 변경은 대시보드에서만 가능. API 는 거부한다)
   "name": "www",
   "main": ".open-next/worker.js",
-  "compatibility_date": "2025-03-01",
+  "compatibility_date": "2026-07-21",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "directory": ".open-next/assets",

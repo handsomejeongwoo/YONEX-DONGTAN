@@ -3,7 +3,12 @@ import "./globals.css";
 import { store } from "@/lib/content";
 import ScrollTop from "@/components/ScrollTop";
 
-const SITE_URL = "https://yonex-dongtan.vercel.app";
+// 공유 미리보기(OG)와 canonical 에 쓰는 사이트 주소.
+// 커스텀 도메인을 붙이면 NEXT_PUBLIC_SITE_URL 만 바꾸고 다시 배포하면 된다.
+// (빌드 시점에 값이 박히므로 배포 환경에도 같은 변수를 넣어야 한다)
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ||
+  "https://www.yonex-dongtan.workers.dev";
 const SITE_DESC = `${store.official} ${store.name}. 경기 경험으로 고르고 정확한 작업으로 완성합니다. 라켓·스트링·신발·대회 장비 상담.`;
 const OG_IMAGE = "/assets/og-image.png";
 
